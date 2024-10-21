@@ -40,4 +40,23 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "Verifying Docker Compose installation..."
 docker-compose --version
 
-echo "Docker and Docker Compose have been installed successfully!"
+# Set up the NVIDIA Container Toolkit
+echo "Setting up NVIDIA Container Toolkit..."
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+&& curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+&& curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+# Update and install NVIDIA Container Toolkit
+echo "Installing NVIDIA Container Toolkit..."
+sudo apt update
+sudo apt install -y nvidia-docker2
+
+# Restart Docker to apply changes
+echo "Restarting Docker..."
+sudo systemctl restart docker
+
+# Test NVIDIA Docker support
+echo "Testing NVIDIA Docker support..."
+sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+
+echo "Docker, Docker Compose, and NVIDIA Container Toolkit have been installed successfully!"
