@@ -8,12 +8,12 @@ The multimodal answering system based on RAG.
 ├── api/
 │   └── Dockerfile
 │   └── main.py
-│   └── requirements.txt
+│   └── requirements.txt  # can use "pip freeze > requirements.txt" to generate
 ├── frontend/
 │   └── Dockerfile
 │   └── src/
 │   └── package.json
-│   └── package-lock.json
+│   └── package-lock.json  # auto generate after "npm install"
 ├── multimodel-model/  # 後端組A (CNN, RNN)
 │   └── Dockerfile
 │   └── main_A.py
