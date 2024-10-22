@@ -1,0 +1,40 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:8080"  # 前端服務對外提供的端口
+    networks:
+      - webapp-network
+
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"  # API 對外提供的端口
+    networks:
+      - webapp-network
+    depends_on:
+      - multimodel-model
+      - rag-model
+
+  multimodel-model:
+    build:
+      context: ./multimodel-model
+    ports:
+      - "5001:5000"  # CNN/RNN 模型服務端口
+    networks:
+      - webapp-network
+
+  rag-model:
+    build:
+      context: ./rag-model
+    ports:
+      - "5002:5000"  # RAG/LLM 模型服務端口
+    networks:
+      - webapp-network
+
+networks:
+  webapp-network:
+    driver: bridge
