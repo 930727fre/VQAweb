@@ -1,0 +1,5 @@
+fastapi==0.85.1
+uvicorn==0.18.3
+pydantic==1.10.2  # FastAPI 用於數據驗證的庫
+sqlalchemy==1.4.41  # 如果使用資料庫，SQLAlchemy 是常用 ORM 庫
+psycopg2-binary==2.9.5  # 如果使用 PostgreSQL 作為資料庫
