@@ -1,0 +1,7 @@
+tensorflow==2.10.0  # TensorFlow 主框架
+keras==2.10.0  # Keras API
+numpy==1.23.3  # 數據處理
+pandas==1.5.0  # 用於數據分析
+opencv-python==4.6.0  # 處理圖像的 OpenCV 庫
+matplotlib==3.6.2  # 圖像可視化
+scikit-learn==1.1.2  # 機器學習模型和工具
