@@ -11,7 +11,7 @@
     "vue": "^3.2.0",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
-    "axios": "^0.27.2"  // 用於發送 HTTP 請求
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@vue/cli-service": "^5.0.0",
