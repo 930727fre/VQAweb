@@ -1,7 +1,8 @@
-transformers==4.22.2  # Huggingface Transformers，用於處理預訓練的 LLM 模型
-datasets==2.5.1  # Huggingface Datasets，用於處理大規模數據集
-faiss-cpu==1.7.2  # 用於高效的相似度檢索
-torch==1.12.1  # PyTorch，用於處理神經網絡
-sentence-transformers==2.2.2  # 用於文本嵌入的庫
-numpy==1.23.3
-pandas==1.5.0
+transformers==4.33.2      # For working with pretrained language models (latest release)
+torch==2.0.1              # PyTorch for deep learning tasks and model execution
+faiss-cpu==1.7.4          # FAISS library for efficient similarity search and clustering (CPU version)
+datasets==2.14.5          # Hugging Face Datasets for handling text datasets
+sentence-transformers==2.2.2  # For embedding-based retrieval tasks (latest release)
+scikit-learn==1.3.0       # For general ML tasks such as vectorization, clustering, etc.
+numpy==1.24.4             # For numerical operations and array manipulations
+nltk==3.8.0               # Natural Language Toolkit for NLP tasks
