@@ -1,5 +1,7 @@
-fastapi==0.85.1
-uvicorn==0.18.3
-pydantic==1.10.2  # FastAPI 用於數據驗證的庫
-sqlalchemy==1.4.41  # 如果使用資料庫，SQLAlchemy 是常用 ORM 庫
-psycopg2-binary==2.9.5  # 如果使用 PostgreSQL 作為資料庫
+fastapi==0.103.0          # Latest version of FastAPI for building APIs
+uvicorn==0.23.2           # ASGI server for running FastAPI applications
+pydantic==2.1.1           # Data validation and settings management (used by FastAPI)
+requests==2.31.0          # For making HTTP requests
+numpy==1.24.4             # For numerical operations if needed
+gunicorn==20.1.0          # WSGI HTTP server for running applications in production
+sqlalchemy==2.0.36         # SQLAlchemy ORM for database management
