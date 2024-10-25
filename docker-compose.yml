@@ -1,7 +1,9 @@
-version: '3.8'
+version: '3.8'  # Docker Compose file version
 
 services:
   api-service:
+    build:
+      context: ./api  # Set build context for API service
     image: api-service:latest  # The API service image
     container_name: api-container  # Name of the container for the API service
     ports:
@@ -22,6 +24,8 @@ services:
       - project-network  # Use project-specific network
 
   backend-service:
+    build:
+      context: ./backend  # Set build context for backend service
     image: backend-service:latest  # The backend service image
     container_name: backend-container  # Name of the container for backend service
     ports:
@@ -40,6 +44,8 @@ services:
       - project-network  # Use project-specific network
 
   frontend-service:
+    build:
+      context: ./frontend  # Set build context for frontend service
     image: frontend-service:latest  # The frontend service image
     container_name: frontend-container  # Name of the container for frontend service
     ports:
