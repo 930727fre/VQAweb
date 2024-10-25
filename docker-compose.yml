@@ -1,40 +1,66 @@
-version: '3'
+version: '3.8'
+
 services:
-  frontend:
-    build:
-      context: ./frontend
+  api-service:
+    image: api-service:latest  # The API service image
+    container_name: api-container  # Name of the container for the API service
     ports:
-      - "8080:8080"  # 前端服務對外提供的端口
-    networks:
-      - webapp-network
-
-  api:
-    build:
-      context: ./api
-    ports:
-      - "8000:8000"  # API 對外提供的端口
-    networks:
-      - webapp-network
+      - "8000:8000"  # Expose port 8000 to the host
+    volumes:
+      - api-data:/app/data  # Mount volume for persistent data
+    environment:
+      - ENV=production  # Set environment variable for production
     depends_on:
-      - multimodel-model
-      - rag-model
-
-  multimodel-model:
-    build:
-      context: ./multimodel-model
-    ports:
-      - "5001:5000"  # CNN/RNN 模型服務端口
+      - backend-service  # Ensure API service starts after backend
+    restart: always  # Always restart the container on failure
+    # healthcheck:  # Comment by prevent accidentally trigger restart before complete the project
+    #   test: ["CMD", "curl", "-f", "http://localhost:8000/health"]  # Check API health via endpoint
+    #   interval: 30s  # Time between health checks
+    #   timeout: 10s  # Time to wait for a response
+    #   retries: 3  # Number of retries before considering unhealthy
     networks:
-      - webapp-network
+      - project-network  # Use project-specific network
 
-  rag-model:
-    build:
-      context: ./rag-model
+  backend-service:
+    image: backend-service:latest  # The backend service image
+    container_name: backend-container  # Name of the container for backend service
     ports:
-      - "5002:5000"  # RAG/LLM 模型服務端口
+      - "5000:5000"  # Expose port 5000 to the host
+    volumes:
+      - backend-data:/app/data  # Mount volume for persistent data
+    environment:
+      - ENV=production  # Set environment variable for production
+    restart: always  # Always restart the container on failure
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:5000/health"]  # Check backend health via endpoint
+    #   interval: 30s  # Time between health checks
+    #   timeout: 10s  # Time to wait for a response
+    #   retries: 3  # Number of retries before considering unhealthy
     networks:
-      - webapp-network
+      - project-network  # Use project-specific network
+
+  frontend-service:
+    image: frontend-service:latest  # The frontend service image
+    container_name: frontend-container  # Name of the container for frontend service
+    ports:
+      - "3000:3000"  # Expose port 3000 to the host
+    volumes:
+      - frontend-data:/app/data  # Mount volume for persistent data
+    environment:
+      - NODE_ENV=production  # Set environment variable for production
+    restart: always  # Always restart the container on failure
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:3000/health"]  # Check frontend health via endpoint
+    #   interval: 30s  # Time between health checks
+    #   timeout: 10s  # Time to wait for a response
+    #   retries: 3  # Number of retries before considering unhealthy
+    networks:
+      - project-network  # Use project-specific network
+
+volumes:
+  api-data:  # Volume for API service data
+  backend-data:  # Volume for backend service data
+  frontend-data:  # Volume for frontend service data
 
 networks:
-  webapp-network:
-    driver: bridge
+  project-network:  # Custom network for project
