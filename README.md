@@ -8,19 +8,18 @@ The multimodal answering system based on RAG.
 ├── api/
 │   └── Dockerfile
 │   └── main.py
+│   └── ...
 │   └── requirements.txt    # can use "pip freeze > requirements.txt" to generate
 ├── frontend/
 │   └── Dockerfile
 │   └── src/
+│   └── ...
 │   └── package.json
 │   └── package-lock.json   # will auto generate after "npm install"
-├── multimodel-model/       # 後端組A (CNN, RNN)
-│   └── Dockerfile
-│   └── main_A.py
-│   └── requirements.txt
-├── rag-model/              # 後端組B (RAG, LLM)
-│   └── Dockerfile
-│   └── main_B.py
-│   └── requirements.txt
+├── backend/       
+│   └── ...                 # Dockerfile(s) in ? folder
+│   └── ...                 # main.py in ?? folder
+│   └── ... 
+│   └── ...                 # requirements.txt(s) in ??? folder
 └── docker-compose.yml
 ```
