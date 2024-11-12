@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.result">
+  <div :class="$style.result" @click="onResultContainerClick">
     <main :class="$style.layout">
       <div :class="$style.bb" />
       <section :class="$style.frameParent">
@@ -27,6 +27,11 @@
 
   export default defineComponent({
     name: "Result",
+    methods: {
+      onResultContainerClick() {
+        this.$router.push("/");
+      },
+    },
   });
 </script>
 <style module>
