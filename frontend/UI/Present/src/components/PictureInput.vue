@@ -2,14 +2,18 @@
   <div :class="$style.pictureInput">
     <div :class="$style.imageUpload">
       <div :class="$style.forInputPic">
-        <div :class="$style.picInput" @click="onPicInputClick" />
+        <div :class="$style.picInput" @click="onPicInputClick"></div>
+        
+        <!-- 更改這裡為 type="file" 並監聽 change 事件 -->
         <input
           :class="$style.uploadThePicture"
           placeholder="Upload the picture"
-          type="text"
+          type="file"
+          accept="image/*"
+          @change="onFileChange"
         />
       </div>
-      <div :class="$style.mid" />
+      <div :class="$style.mid"></div>
       <input
         :class="$style.imageUploadChild"
         placeholder="Type your Question"
@@ -27,12 +31,23 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
   import { defineComponent } from "vue";
 
   export default defineComponent({
     name: "PictureInput",
     methods: {
+      onFileChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        const file = input.files ? input.files[0] : null;
+        if (file) {
+          // 這裡可以處理圖片文件，例如上傳圖片或進行其他處理
+          console.log("已選擇圖片文件：", file);
+        } else {
+          console.log("未選擇圖片文件");
+        }
+    },
       onPicInputClick() {
         this.$router.push("/");
       },
