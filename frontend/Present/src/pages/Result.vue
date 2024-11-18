@@ -6,9 +6,9 @@
         <div :class="$style.backgroundParent">
           <div :class="$style.background" />
           <header :class="$style.top" />
-          <textarea :class="$style.aOutput" rows="10" cols="28" />
           <div :class="$style.qOutputParent">
-            <textarea :class="$style.qOutput" rows="10" cols="28" />
+            <!-- 顯示 question -->
+            <textarea :class="$style.qOutput" rows="10" cols="28">{{ question }}</textarea>
             <img
               :class="$style.sendIcon"
               loading="lazy"
@@ -22,18 +22,35 @@
     </main>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from "vue";
 
-  export default defineComponent({
-    name: "Result",
-    methods: {
-      onResultContainerClick() {
-        this.$router.push("/");
-      },
-    },
-  });
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useRoute, useRouter } from "vue-router";  // 引入 useRoute 和 useRouter
+
+export default defineComponent({
+  name: "Result",
+  setup() {
+    const router = useRouter(); 
+    const route = useRoute();  // 使用 useRoute 來取得當前路由資訊
+
+    // 從路由的 query 參數中取得 question 和 image
+    const question = route.query.question as string || '';  // 取得問題內容
+    const image = route.query.image as string || '';  // 取得圖片資料
+
+    // 點擊時，跳轉回首頁
+    const onResultContainerClick = () => {
+      router.push("/");  // 跳轉到首頁
+    };
+
+    return {
+      question,
+      image,
+      onResultContainerClick
+    };
+  },
+});
 </script>
+
 <style module>
   .bb {
     height: 1080px;
@@ -76,6 +93,7 @@
     border-radius: var(--br-3xs);
     z-index: 2;
   }
+  /* question 的字體樣式 */
   .qOutput {
     border: none;
     background-color: var(--color-lightcoral);
@@ -87,6 +105,10 @@
     left: 0px;
     border-radius: var(--br-3xs);
     z-index: 2;
+    font-family: 'Arial', sans-serif;  /* 設定字型 */
+    font-size: 30px;                  /* 設定字體大小 */
+    color:#333;                      /* 設定字體顏色 */
+    padding: 10px;                    /* 設定內邊距 */
   }
   .sendIcon {
     position: absolute;

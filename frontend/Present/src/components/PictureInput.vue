@@ -2,19 +2,19 @@
   <div :class="$style.pictureInput">
     <div :class="$style.imageUpload">
       <div :class="$style.forInputPic">
-        <div :class="$style.picInput" @click="onPicInputClick"></div>
+        <div :class="$style.picInput" @click="onSendClick"></div>
         
-        <!-- 更改這裡為 type="file" 並監聽 change 事件 -->
+        <!-- 文件輸入框 -->
         <input
           :class="$style.uploadThePicture"
-          placeholder="Upload the picture"
           type="file"
           accept="image/*"
           @change="onFileChange"
         />
       </div>
-      <div :class="$style.mid"></div>
+      <!-- 文本輸入框 -->
       <input
+        v-model="question"
         :class="$style.imageUploadChild"
         placeholder="Type your Question"
         type="text"
@@ -33,29 +33,52 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 
-  export default defineComponent({
-    name: "PictureInput",
-    methods: {
-      onFileChange(event: Event) {
-        const input = event.target as HTMLInputElement;
-        const file = input.files ? input.files[0] : null;
-        if (file) {
-          // 這裡可以處理圖片文件，例如上傳圖片或進行其他處理
-          console.log("已選擇圖片文件：", file);
-        } else {
-          console.log("未選擇圖片文件");
+export default defineComponent({
+  name: "PictureInput",
+  setup() {
+    const router = useRouter();
+    const question = ref(""); // 文本輸入的數據
+    const selectedImage = ref<string | null>(null); // 存儲上傳的圖片文件
+
+    const onFileChange = (event: Event) => {
+      const input = event.target as HTMLInputElement;
+      const file = input.files ? input.files[0] : null;
+
+      if (file) {
+        // 將圖片文件轉為 Base64 URL
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          selectedImage.value = e.target?.result as string;
+          console.log("圖片已上傳：", selectedImage.value);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        console.log("未選擇圖片文件");
+      }
+    };
+
+    const onSendClick = () => {
+      router.push({
+        path: '/result',
+        query: {
+          question: question.value,
+          image: selectedImage.value || ''
         }
-    },
-      onPicInputClick() {
-        this.$router.push("/");
-      },
-      onSendClick() {
-        this.$router.push("/result");
-      },
-    },
-  });
+      });
+    };
+
+
+    return {
+      question,
+      selectedImage,
+      onFileChange,
+      onSendClick,
+    };
+  },
+});
 </script>
 <style module>
   .picInput {
