@@ -9,6 +9,8 @@
           <div :class="$style.qOutputParent">
             <!-- 顯示 question -->
             <textarea :class="$style.qOutput" rows="10" cols="28">{{ question }}</textarea>
+            <!-- 顯示 answer -->
+            <textarea :class="$style.aOutput" rows="10" cols="28" />
             <img
               :class="$style.sendIcon"
               loading="lazy"
@@ -87,9 +89,9 @@ export default defineComponent({
     height: 196px;
     width: 567px;
     outline: none;
-    position: absolute;
-    top: 427px;
-    left: 136px;
+    position: relative;
+    top: 235px;
+    left: -1000px;
     border-radius: var(--br-3xs);
     z-index: 2;
   }
