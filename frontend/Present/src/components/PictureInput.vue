@@ -122,7 +122,7 @@ export default defineComponent({
     width: 750px;
     border: none;
     outline: none;
-    background-color: var(--color-skyblue);
+    background-color: var(--color-cadetblue-100);
     border-radius: var(--br-3xs) 0px 0px var(--br-3xs);
     display: flex;
     flex-direction: row;
@@ -132,14 +132,14 @@ export default defineComponent({
     box-sizing: border-box;
     font-family: var(--font-roboto);
     font-size: var(--font-size-5xl);
-    color: var(--color-lavenderblush);
+    color: var(--color-gray);
     max-width: 100%;
     z-index: 2;
   }
 
   /* 滑鼠移入時的背景顏色 */
   .customUploadButton:hover {
-    background-color: var(--color-cadetblue-100);
+    background-color: var(--color-skyblue);
   }
   
   /* 輸入框容器 */
@@ -162,7 +162,7 @@ export default defineComponent({
     width: 100%;
     border: none;
     outline: none;
-    background-color: var(--color-cadetblue-200);
+    background-color: var(--color-cadetblue-100);
     flex: 1;
     border-radius: 0px var(--br-3xs) var(--br-3xs) 0px;
     display: flex;
@@ -173,14 +173,14 @@ export default defineComponent({
     box-sizing: border-box;
     font-family: var(--font-roboto);
     font-size: var(--font-size-5xl);
-    color: var(--color-lavenderblush);
+    color: var(--color-gray);
     min-width: 300px;
     max-width: 100%;
   }
   
   /* 滑鼠移入時的背景顏色 */
   .contextinput:hover {
-    background-color: var(--color-cadetblue-100);
+    background-color: var(--color-skyblue);
   }
   
   /* 發送按鈕圖標樣式 */
