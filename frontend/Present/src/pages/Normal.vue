@@ -10,9 +10,9 @@
           <div :class="$style.outputAreaWrapper">
             <div :class="$style.outputArea">
               <div :class="$style.qandA">
-                <textarea :class="$style.qOutput" rows="10" cols="28" />
+                <section :class="$style.qOutput" rows="10" cols="28" />
               </div>
-              <textarea :class="$style.aOutput" rows="10" cols="28" />
+              <section :class="$style.aOutput" rows="10" cols="28" />
             </div>
           </div>
         </div>
