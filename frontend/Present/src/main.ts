@@ -1,9 +1,6 @@
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
-
-import TapPic from "./pages/TapPic.vue";
-import TapQuest from "./pages/TapQuest.vue";
 import Result from "./pages/Result.vue";
 import Normal from "./pages/Normal.vue";
 import "./global.css";
@@ -17,23 +14,13 @@ interface Route {
 const routes: Route[] = [
   {
     path: "/",
-    name: "TapPic",
-    component: TapPic,
-  },
-  {
-    path: "/tap-quest",
-    name: "TapQuest",
-    component: TapQuest,
+    name: "Normal",
+    component: Normal,
   },
   {
     path: "/result",
     name: "Result",
     component: Result,
-  },
-  {
-    path: "/normal",
-    name: "Normal",
-    component: Normal,
   },
 ];
 

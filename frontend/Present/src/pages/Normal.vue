@@ -1,33 +1,33 @@
 <template>
-  <div :class="$style.normal">
+  <div :class="$style.tapQuest">
     <main :class="$style.layout">
       <div :class="$style.bb" />
       <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
-      <section :class="$style.content">
+      <section :class="$style.contentArea">
         <div :class="$style.background" />
-        <div :class="$style.topParent">
+        <div :class="$style.questionInput">
           <header :class="$style.top" />
           <div :class="$style.outputAreaWrapper">
             <div :class="$style.outputArea">
-              <div :class="$style.qAArea">
+              <div :class="$style.qandA">
                 <textarea :class="$style.qOutput" rows="10" cols="28" />
               </div>
               <textarea :class="$style.aOutput" rows="10" cols="28" />
             </div>
           </div>
         </div>
-        <ImageInputArea />
+        <PictureInput />
       </section>
     </main>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import ImageInputArea from "../components/ImageInputArea.vue";
+  import PictureInput from "../components/PictureInput.vue";
 
   export default defineComponent({
-    name: "Normal",
-    components: { ImageInputArea },
+    name: "TapQuest",
+    components: { PictureInput },
   });
 </script>
 <style module>
@@ -82,7 +82,7 @@
     max-width: 100%;
     z-index: 2;
   }
-  .qAArea {
+  .qandA {
     align-self: stretch;
     display: flex;
     flex-direction: row;
@@ -120,7 +120,7 @@
     box-sizing: border-box;
     max-width: 100%;
   }
-  .topParent {
+  .questionInput {
     align-self: stretch;
     display: flex;
     flex-direction: column;
@@ -129,7 +129,7 @@
     gap: var(--gap-35xl);
     max-width: 100%;
   }
-  .content {
+  .contentArea {
     position: absolute;
     top: 24px;
     left: 40px;
@@ -155,7 +155,7 @@
     overflow: hidden;
     max-width: 100%;
   }
-  .normal {
+  .tapQuest {
     width: 100%;
     position: relative;
     display: flex;
@@ -166,7 +166,7 @@
     letter-spacing: normal;
   }
 
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1408px) {
     .layout {
       height: auto;
       min-height: 1080;

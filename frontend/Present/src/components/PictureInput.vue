@@ -2,30 +2,35 @@
   <div :class="$style.pictureInput">
     <div :class="$style.imageUpload">
       <div :class="$style.forInputPic">
-        <div :class="$style.picInput" @click="onSendClick"></div>
-        
-        <!-- 文件輸入框 -->
+        <!-- 隱藏檔案選擇框 -->
         <input
+          ref="fileInputRef"
           :class="$style.uploadThePicture"
           type="file"
           accept="image/*"
-          @change="onFileChange"
+          @change="onFileChange" 
         />
+        <!-- 自定義的選擇按鈕，顯示檔案名稱 -->
+        <div :class="$style.customUploadButton" @click="triggerFileInput">
+          {{ fileName || 'Upload the picture' }} <!-- 點擊此按鈕觸發檔案選擇 -->
+        </div>
       </div>
+      <div :class="$style.mid" />
       <!-- 文本輸入框 -->
       <input
         v-model="question"
-        :class="$style.imageUploadChild"
-        placeholder="Type your Question"
+        :class="$style.contextinput "
+        placeholder="Type your Question"  
         type="text"
       />
       <div :class="$style.submitButton">
+        <!-- 發送按鈕 -->
         <img
           :class="$style.sendIcon"
           loading="lazy"
-          alt=""
+          alt="send icon"
           src="/send.svg"
-          @click="onSendClick"
+          @click="onSendClick"  
         />
       </div>
     </div>
@@ -39,16 +44,21 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "PictureInput",
   setup() {
+    const fileInputRef = ref<HTMLInputElement | null>(null);
     const router = useRouter();
-    const question = ref(""); // 文本輸入的數據
-    const selectedImage = ref<string | null>(null); // 存儲上傳的圖片文件
+    const question = ref(""); // 用戶輸入的問題
+    const selectedImage = ref<string | null>(null); // 存儲上傳的圖片數據
+    const fileName = ref<string | null>(null); // 存儲圖片檔名
 
+
+    // 處理檔案變更事件
     const onFileChange = (event: Event) => {
       const input = event.target as HTMLInputElement;
       const file = input.files ? input.files[0] : null;
 
       if (file) {
-        // 將圖片文件轉為 Base64 URL
+        fileName.value = file.name;
+        // 使用 FileReader 將圖片轉為 Base64 格式
         const reader = new FileReader();
         reader.onload = (e) => {
           selectedImage.value = e.target?.result as string;
@@ -60,27 +70,37 @@ export default defineComponent({
       }
     };
 
+    // 發送按鈕的點擊事件
     const onSendClick = () => {
       router.push({
         path: '/result',
         query: {
-          question: question.value,
-          image: selectedImage.value || ''
+          question: question.value, // 傳送問題
+          image: selectedImage.value || '' // 傳送圖片（若有選擇）
         }
       });
     };
 
+    // 觸發檔案輸入框的點擊事件
+    const triggerFileInput = () => {
+      fileInputRef.value?.click(); // 使用 ref 來觸發檔案輸入框的點擊
+    };
 
     return {
       question,
       selectedImage,
       onFileChange,
       onSendClick,
+      triggerFileInput,
+      fileInputRef,  
+      fileName,
     };
   },
 });
 </script>
+
 <style module>
+  /* 整體圖片輸入區域 */
   .picInput {
     position: absolute;
     bottom: 0px;
@@ -91,24 +111,38 @@ export default defineComponent({
     height: 100%;
     cursor: pointer;
   }
+  
+  /* 隱藏原始檔案選擇框 */
   .uploadThePicture {
-    width: 100%;
+    display: none;
+  }
+  
+  /* 自定義上傳按鈕樣式 */
+  .customUploadButton {
+    width: 750px;
     border: none;
     outline: none;
+    background-color: var(--color-skyblue);
+    border-radius: var(--br-3xs) 0px 0px var(--br-3xs);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-7xl) var(--padding-11xl);
+    box-sizing: border-box;
     font-family: var(--font-roboto);
     font-size: var(--font-size-5xl);
-    background-color: transparent;
-    position: absolute;
-    bottom: 26px;
-    left: 30px;
-    color: var(--color-gray);
-    text-align: left;
-    display: flex;
-    align-items: center;
-    height: 29px;
-    padding: 0;
-    z-index: 1;
+    color: var(--color-lavenderblush);
+    max-width: 100%;
+    z-index: 2;
   }
+
+  /* 滑鼠移入時的背景顏色 */
+  .customUploadButton:hover {
+    background-color: var(--color-cadetblue-100);
+  }
+  
+  /* 輸入框容器 */
   .forInputPic {
     height: 81px;
     width: 750px;
@@ -123,11 +157,12 @@ export default defineComponent({
     background-color: var(--color-steelblue);
     z-index: 2;
   }
-  .imageUploadChild {
+  /* 輸入框背景顏色 */
+  .contextinput {
     width: 100%;
     border: none;
     outline: none;
-    background-color: var(--color-skyblue);
+    background-color: var(--color-cadetblue-200);
     flex: 1;
     border-radius: 0px var(--br-3xs) var(--br-3xs) 0px;
     display: flex;
@@ -138,10 +173,17 @@ export default defineComponent({
     box-sizing: border-box;
     font-family: var(--font-roboto);
     font-size: var(--font-size-5xl);
-    color: var(--color-gray);
+    color: var(--color-lavenderblush);
     min-width: 300px;
     max-width: 100%;
   }
+  
+  /* 滑鼠移入時的背景顏色 */
+  .contextinput:hover {
+    background-color: var(--color-cadetblue-100);
+  }
+  
+  /* 發送按鈕圖標樣式 */
   .sendIcon {
     width: 74px;
     height: 74px;
@@ -151,6 +193,8 @@ export default defineComponent({
     cursor: pointer;
     z-index: 4;
   }
+  
+  /* 按鈕容器 */
   .submitButton {
     display: flex;
     flex-direction: column;
@@ -158,6 +202,8 @@ export default defineComponent({
     justify-content: flex-end;
     padding: 0px 0px var(--padding-10xs);
   }
+  
+  /* 圖片上傳區域容器 */
   .imageUpload {
     flex: 1;
     display: flex;
@@ -170,6 +216,8 @@ export default defineComponent({
     row-gap: 20px;
     max-width: 100%;
   }
+  
+  /* 整體圖片輸入區域容器 */
   .pictureInput {
     width: 1738px;
     display: flex;
@@ -180,7 +228,14 @@ export default defineComponent({
     box-sizing: border-box;
     max-width: 100%;
   }
+  /* 顯示檔案名稱的樣式 */
+  .fileName {
+    margin-top: 10px;
+    font-size: var(--font-size-md);
+    color: var(--color-gray);
+  }
 
+  /* 響應式設計，當螢幕寬度小於450px時，改變按鈕文字大小 */
   @media screen and (max-width: 450px) {
     .uploadThePicture {
       font-size: var(--font-size-lgi);
