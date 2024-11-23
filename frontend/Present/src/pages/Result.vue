@@ -8,15 +8,16 @@
           <header :class="$style.top" />
           <div :class="$style.qOutputParent">
             <!-- 顯示 question -->
-            <textarea :class="$style.qOutput" rows="10" cols="28">{{ question }}</textarea>
+            <div :class="$style.qOutput">
+              {{ question }}
+              <!-- 圖片預覽 -->
+              <div v-if="image" class="image-preview">
+                <img :src="image" alt="Uploaded Preview" />
+              </div>
+            </div>
             <!-- 顯示 answer -->
             <textarea :class="$style.aOutput" rows="10" cols="28" />
-            <img
-              :class="$style.sendIcon"
-              loading="lazy"
-              alt=""
-              src="/send.svg"
-            />
+            <img :class="$style.sendIcon" loading="lazy" alt="" src="/send.svg" />
           </div>
         </div>
         <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
@@ -53,6 +54,22 @@ export default defineComponent({
 });
 </script>
 
+<style scoped>
+.image-preview {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-preview img {
+  max-width: 400px; /* 限制圖片的最大寬度 */
+  max-height: 400px; /* 限制圖片的最大高度 */
+  width: auto; /* 確保寬高比例 */
+  height: auto; /* 確保寬高比例 */
+  object-fit: contain; /* 保持圖片內容完整可見 */
+}
+</style>
 <style module>
   .bb {
     height: 1080px;
@@ -89,7 +106,7 @@ export default defineComponent({
     height: 196px;
     width: 567px;
     outline: none;
-    position: relative;
+    position: absolute;
     top: 235px;
     left: -1000px;
     border-radius: var(--br-3xs);
@@ -99,18 +116,21 @@ export default defineComponent({
   .qOutput {
     border: none;
     background-color: var(--color-lightcoral);
-    height: 196px;
+    height: auto; 
     width: 567px;
     outline: none;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    position: relative;
+    top: 0;
+    left: 0;
     border-radius: var(--br-3xs);
     z-index: 2;
-    font-family: 'Arial', sans-serif;  /* 設定字型 */
-    font-size: 30px;                  /* 設定字體大小 */
-    color:#333;                      /* 設定字體顏色 */
-    padding: 10px;                    /* 設定內邊距 */
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    color: #333;
+    padding: 10px;
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
+    margin-bottom: 10px; 
   }
   .sendIcon {
     position: absolute;
