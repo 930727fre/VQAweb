@@ -144,8 +144,8 @@ export default defineComponent({
   
   /* 輸入框容器 */
   .forInputPic {
-    height: 81px;
-    width: 750px;
+    height: 7.5%;
+    width: 39%;
     position: relative;
     max-width: 100%;
     z-index: 2;
@@ -219,7 +219,7 @@ export default defineComponent({
   
   /* 整體圖片輸入區域容器 */
   .pictureInput {
-    width: 1738px;
+    width: 90.5%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
