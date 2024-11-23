@@ -3,7 +3,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 import Result from "./pages/Result.vue";
 import Normal from "./pages/Normal.vue";
+import Guide from "./pages/Guide.vue";
+import GuideShow from "./pages/GuideShow.vue";
 import "./global.css";
+
+
 
 interface Route {
   path: string;
@@ -21,6 +25,16 @@ const routes: Route[] = [
     path: "/result",
     name: "Result",
     component: Result,
+  },
+  {
+    path: "/guide", 
+    name: "Guide", 
+    component: Guide,
+  },
+  {
+    path: "/guide-show", 
+    name: "GuideShow",   
+    component: GuideShow, 
   },
 ];
 

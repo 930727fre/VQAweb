@@ -1,9 +1,9 @@
 <template>
-  <div :class="$style.tapQuest">
-    <main :class="$style.layout">
+  <div :class="$style.tapQuest" @click.stop>
+    <main :class="$style.layout" @click.stop>
       <div :class="$style.bb" />
       <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
-      <section :class="$style.contentArea">
+      <section :class="$style.contentArea" @click.stop>
         <div :class="$style.background" />
         <div :class="$style.questionInput">
           <header :class="$style.top" />
@@ -18,22 +18,63 @@
         </div>
         <PictureInput />
       </section>
-      <!-- 問號圖標 -->
-      <router-link :to="{ path: '/guide' }" :class="$style.helpIcon">
-        <img alt="Help Icon" src="/help1.svg" />
-      </router-link>
+      <img
+        :class="$style.arrowright"
+        loading="lazy"
+        alt=""
+        src="/arrow-121@2x.png"
+        @click.stop
+      />
+      <img
+        :class="$style.arrowright2"
+        loading="lazy"
+        alt=""
+        src="/arrow-131@2x.png"
+        @click.stop
+      />
+      <img
+        :class="$style.nextButton"
+        loading="lazy"
+        alt="Next"
+        src="/next.png"
+        @click="handleNextClick"
+      />
+      <div :class="$style.instructions">
+        <p>You can input your picture at left side.</p>
+        <p>Type in your question at right side.</p>
+        <p>Press "Next" to move on.</p>
+      </div>
     </main>
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from "vue";
-  import PictureInput from "../components/PictureInput.vue";
 
-  export default defineComponent({
-    name: "TapQuest",
-    components: { PictureInput },
-  });
+<script lang="ts">
+import { defineComponent, onMounted, onUnmounted } from "vue";
+import PictureInput from "../components/PictureInput.vue";
+
+export default defineComponent({
+  name: "TapQuest",
+  components: { PictureInput },
+  methods: {
+    handleNextClick() {
+      this.$router.push({ name: "Normal" });
+    },
+    preventOtherClicks(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      if (!target.closest(`.${this.$style.nextButton}`)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    },
+  },
+  mounted() {
+    document.addEventListener("click", this.preventOtherClicks, true); // 捕获阶段阻止事件
+  },
+  unmounted() {
+    document.removeEventListener("click", this.preventOtherClicks, true); // 移除监听器
+  },
+});
 </script>
 
 <style module>
@@ -171,21 +212,50 @@
     line-height: normal;
     letter-spacing: normal;
   }
-  .helpIcon {
+  .nextButton {
     position: absolute;
-    bottom: 100px;
-    left: 100px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
+    top: 550px; /* 可根據需求調整位置 */
+    left: 1450px; /* 可根據需求調整位置 */
+    width: 200px; /* 控制圖片大小 */
+    height: 252px; /* 控制圖片大小 */
+    object-fit: contain; /* 確保圖片按比例縮放 */
+    z-index: 3;
+  }
+  .instructions {
+    position: absolute;
+    top: 600px; /* 調整文字說明的位置 */
+    left: 1000px; /* 調整文字說明的位置 */
+    width: 300px; /* 控制文字容器寬度 */
+    text-align: center; /* 居中對齊 */
+    font-size: 18px; /* 設定文字大小 */
+    color: #333; /* 設定文字顏色 */
+    font-family: Arial, sans-serif; /* 字體設定 */
     z-index: 4;
+    background: rgba(255, 255, 255, 0.8); /* 半透明背景提高可讀性 */
+    padding: 10px 20px; /* 增加內邊距 */
+    border-radius: 8px; /* 圓角效果 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* 添加陰影 */
   }
-  .helpIcon img {
-    width: 100%;
-    height: 100%;
+  .arrowright{
+    position: absolute;
+    top: 706.4px;
+    left: 1273.5px;
+    width: 166.9px;
+    height: 222.1px;
+    overflow: hidden;
     object-fit: contain;
+    z-index: 3;
   }
-
+  .arrowright2{
+    position: absolute;
+    top: 606.4px;
+    left: 733.5px;
+    width: 300.9px;
+    height: 360.1px;
+    overflow: hidden;
+    object-fit: contain;
+    z-index: 3;
+  }
   @media screen and (max-width: 1408px) {
     .layout {
       height: auto;
