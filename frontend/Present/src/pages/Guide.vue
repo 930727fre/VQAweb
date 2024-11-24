@@ -55,7 +55,7 @@ export default defineComponent({
   components: { FrameComponent1 },
   methods: {
     goToGuideShow() {
-      this.$router.push({ name: "GuideShow" }); // 跳轉到名稱為 GuideShow 的路由
+      this.$router.push({ name: "Normal" }); // 跳轉到名稱為 GuideShow 的路由
     },
   },
 });

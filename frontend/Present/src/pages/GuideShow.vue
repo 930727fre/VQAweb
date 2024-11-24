@@ -58,7 +58,7 @@ export default defineComponent({
   components: { PictureInput },
   methods: {
     handleNextClick() {
-      this.$router.push({ name: "Normal" });
+      this.$router.push({ name: "Guide" });
     },
     preventOtherClicks(e: MouseEvent) {
       const target = e.target as HTMLElement;

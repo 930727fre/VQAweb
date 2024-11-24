@@ -19,7 +19,7 @@
         <PictureInput :class="$style.fixedPictureInput" />
       </section>
       <!-- 問號圖標 -->
-      <router-link :to="{ path: '/guide' }" :class="$style.helpIcon">
+      <router-link :to="{ path: '/guide-show' }" :class="$style.helpIcon">
         <img alt="Help Icon" src="/help1.svg" />
       </router-link>
     </main>
