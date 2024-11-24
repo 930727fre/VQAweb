@@ -1,26 +1,26 @@
 <template>
   <div :class="$style.result" @click="onResultContainerClick">
+    <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
     <main :class="$style.layout">
       <div :class="$style.bb" />
       <section :class="$style.frameParent">
         <div :class="$style.backgroundParent">
           <div :class="$style.background" />
           <header :class="$style.top" />
-          <div :class="$style.qOutputParent">
+            <div :class="$style.outputArea">
             <!-- 顯示 question -->
-            <div :class="$style.qOutput">
-              {{ question }}
-              <!-- 圖片預覽 -->
-              <div v-if="image" class="image-preview">
-                <img :src="image" alt="Uploaded Preview" />
-              </div>
-            </div>
+              <div :class="$style.qOutput">
+                {{ question }}
+                <!-- 圖片預覽 -->
+                <div v-if="image" class="image-preview">
+                  <img :src="image" alt="Uploaded Preview" />
+                  </div>
+                </div>
             <!-- 顯示 answer -->
-            <textarea :class="$style.aOutput" rows="10" cols="28" />
-            <img :class="$style.sendIcon" loading="lazy" alt="" src="/send.svg" />
+              <section :class="$style.aOutput" rows="10" cols="28" />
           </div>
         </div>
-        <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
+        <img :class="$style.sendIcon" loading="lazy" alt="" src="/send.svg" />
       </section>
     </main>
   </div>
@@ -56,15 +56,17 @@ export default defineComponent({
 
 <style scoped>
 .image-preview {
-  margin-top: 15px;
+  margin-top: 1.3%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .image-preview img {
-  max-width: 400px; /* 限制圖片的最大寬度 */
-  max-height: 400px; /* 限制圖片的最大高度 */
+  max-width: 60.8%; /* 限制圖片的最大寬度 */
+  max-height: 37%; /* 限制圖片的最大高度 */
+  min-width: 60.8%; /* 限制圖片的最大寬度 */
+  min-height: 37%; /* 限制圖片的最大高度 */
   width: auto; /* 確保寬高比例 */
   height: auto; /* 確保寬高比例 */
   object-fit: contain; /* 保持圖片內容完整可見 */
@@ -72,141 +74,161 @@ export default defineComponent({
 </style>
 <style module>
   .bb {
-    height: 1080px;
-    width: 1920px;
-    position: relative;
-    background-color: var(--color-lavenderblush);
-    display: none;
-    max-width: 100%;
-  }
-  .background {
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
-    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
-    border-radius: var(--br-3xs);
-    background-color: var(--color-gainsboro);
+    background-color: var(--color-lavenderblush);
     width: 100%;
     height: 100%;
     display: none;
   }
+  .background {
+    align-self: stretch;/* 延伸它爸 */
+    height: 93.7%;
+    position: relative;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-3xs);
+    background-color: var(--color-gainsboro);
+    display: none;
+  }
   .top {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    align-self: stretch;
+    height: 18vh;
+    position: relative;
     border-radius: var(--br-3xs);
     background-color: var(--color-cadetblue-200);
-    width: 1840px;
-    height: 161px;
+    min-height: 18vh;
     z-index: 2;
   }
   .aOutput {
-    border: none;
+    position: fixed; /* 設定絕對定位 */
+    top: 53%;  /* 距離父元素頂部的 50% */
+    left: 10%; /* 距離父元素左側的 15% */
+    width: 30%;  /* 設定寬度為 30% */
+    height: 25%; /* 設定高度為 25% */
     background-color: var(--color-mistyrose);
-    height: 196px;
-    width: 567px;
-    outline: none;
-    position: absolute;
-    top: 235px;
-    left: -1000px;
     border-radius: var(--br-3xs);
+    max-width: 100%;
     z-index: 2;
   }
   /* question 的字體樣式 */
   .qOutput {
-    border: none;
+    position: fixed; /* 設定絕對定位 */
+    top: 25%;  /* 距離父元素頂部的 25% */
+    left: 60%; /* 距離父元素左側的 60% */
+    width: 30%;  /* 設定寬度為 30% */
     background-color: var(--color-lightcoral);
-    height: auto; 
-    width: 567px;
-    outline: none;
-    position: relative;
-    top: 0;
-    left: 0;
     border-radius: var(--br-3xs);
+    max-width: 100%;
     z-index: 2;
     font-family: 'Arial', sans-serif;
-    font-size: 30px;
-    color: #333;
-    padding: 10px;
+    font-size: 2.7vw;
+    color: #3704c5;
+    padding: 0.5%;
     overflow-wrap: break-word; 
     word-wrap: break-word;
-    margin-bottom: 10px; 
+    margin-bottom: 0.5%; 
   }
   .sendIcon {
     position: absolute;
-    top: 677px;
-    left: 558px;
-    width: 74px;
-    height: 74px;
+    bottom: 1.2%;
+    right: 5%;
+    width: 8%;
+    height: 8%;
     overflow: hidden;
     z-index: 4;
   }
-  .qOutputParent {
-    position: absolute;
-    top: 215px;
-    left: 1165px;
-    width: 632px;
-    height: 751px;
+  .outputArea { /* 輸出格與邊間距 */
+    width: 93%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+    max-width: 100%;
   }
   .backgroundParent {
-    position: absolute;
-    top: 24px;
-    left: 0px;
+    position: fixed;
+    /* 留縫 */
+    top: 2.5%;
+    bottom: 2.5%;
+    left: 2%;
+    right: 2%;
+    /* 加陰影、圓弧、顏色 */
     box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
     border-radius: var(--br-3xs);
     background-color: var(--color-gainsboro);
-    width: 1840px;
-    height: 1013px;
-    z-index: 1;
+    /* 板子寬度 */
+    width: 96%;
+    /* 可當爸 */
+    display: flex;
+    flex-direction: column;/* 橫向元素排列 */
+    align-items: flex-end;/* 垂直居下對齊 */
+    justify-content: flex-start;/* 水平居上對齊 */
+    padding: 0px 0px var(--padding-25xl);/* 元素內邊距 */
+    box-sizing: border-box;/* 控制元素寬度和高度 */
+    gap: var(--gap-246xl);/* 設置 flexbox 或 grid 布局中子元素之間間距 */
+    max-width: 100%;
+    z-index: 1;/* 第一層 */
   }
   .logo1Icon {
-    position: absolute;
-    top: -9px;
-    left: 800px;
-    width: 240px;
-    height: 207px;
-    object-fit: cover;
-    z-index: 3;
+    position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 1%;
+    bottom: 99%;
+    /* 左右置中操作 */
+    left: 50%; /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-50%); /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;/* 超出則隱藏 */
+    object-fit: cover;/* 完全填滿其容器 */
+    z-index: 3;/* 第三層(最上層) */
   }
   .frameParent {
-    height: 1037px;
+    height: 96%;
     flex: 1;
     position: relative;
     max-width: 100%;
   }
-  .layout {
-    flex: 1;
-    background-color: var(--color-lavenderblush);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 0px 40px var(--padding-24xl);
-    box-sizing: border-box;
-    max-width: 100%;
+  .layout {/* Frame上的背景 */
+    height: 100%;/* 相對.tapQuest，100%高度 */
+    flex: 1;/* 第一層 */
+    position: relative;/* 相對定位 */
+    background-color: var(--color-lavenderblush);/* 顏色 */
+    overflow: hidden;/* 超出則隱藏 */
+    max-width: 100%;/* 相對.tapQuest，100%高度 */
   }
   .result {
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    line-height: normal;
-    letter-spacing: normal;
+    width: 100%;/* 100%寬度 */
+    height: 100vh;/* 100vh高度 */
+    position: relative;/* 相對定位 */
+    display: flex;/* 子元素按此元素排列 */
+    flex-direction: row;/* 橫向元素排列 */
+    justify-content: center; /* 水平居中對齊 */
+    align-items: center; /* 垂直居中對齊 */
+    line-height: normal;/* 正常行高 */
+    letter-spacing: normal;/* 正常字母間距 */
   }
 
-  @media screen and (max-width: 864px) {
-    .layout {
-      padding-bottom: var(--padding-9xl);
-      box-sizing: border-box;
+  @media screen and (min-width: 1200px) {
+    .result {
+      justify-content: space-between; /* 項目之間有間距 */
     }
   }
-  @media screen and (max-width: 432px) {
-    .layout {
-      padding-bottom: var(--padding-xl);
-      box-sizing: border-box;
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    
+  }
+
+  @media screen and (max-width: 767px) {
+    .result {
+      flex-direction: column; /* 改為縱向排列 */
+      height: auto; /* 讓高度自動調整 */
     }
   }
 </style>

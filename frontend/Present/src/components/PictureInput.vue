@@ -117,26 +117,7 @@ export default defineComponent({
     display: none;
   }
   
-  /* 自定義上傳按鈕樣式 */
-  .customUploadButton {
-    width: 750px;
-    border: none;
-    outline: none;
-    background-color: var(--color-cadetblue-100);
-    border-radius: var(--br-3xs) 0px 0px var(--br-3xs);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--padding-7xl) var(--padding-11xl);
-    box-sizing: border-box;
-    font-family: var(--font-roboto);
-    font-size: var(--font-size-5xl);
-    color: var(--color-gray);
-    max-width: 100%;
-    z-index: 2;
-  }
-
+  
   /* 滑鼠移入時的背景顏色 */
   .customUploadButton:hover {
     background-color: var(--color-skyblue);
@@ -146,36 +127,61 @@ export default defineComponent({
   .forInputPic {
     height: 7.5%;
     width: 39%;
-    position: relative;
+    position: fixed; /* 設定絕對定位 */
+    left: 10%;
     max-width: 100%;
     z-index: 2;
   }
   .mid {
-    height: 81px;
-    width: 51px;
-    position: relative;
+    position: fixed; /* 設定絕對定位 */
+    left: 48%;
+    height: 7.5vh;
+    width: 4%;
     background-color: var(--color-steelblue);
     z-index: 2;
   }
-  /* 輸入框背景顏色 */
-  .contextinput {
-    width: 100%;
+  /* 自定義上傳按鈕樣式 */
+  .customUploadButton {
+    position: fixed; /* 設定絕對定位 */
+    left: 10%;
+    width: 38%;
+    height: 7.5vh;
+    overflow: hidden; /* 隱藏溢出的內容 */
     border: none;
     outline: none;
     background-color: var(--color-cadetblue-100);
-    flex: 1;
-    border-radius: 0px var(--br-3xs) var(--br-3xs) 0px;
+    border-radius: var(--br-3xs) 0px 0px var(--br-3xs);
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-start;
     padding: var(--padding-7xl) var(--padding-9xl);
     box-sizing: border-box;
     font-family: var(--font-roboto);
-    font-size: var(--font-size-5xl);
+    font-size: 2.5vh;
     color: var(--color-gray);
-    min-width: 300px;
     max-width: 100%;
+  }
+  /* 輸入框背景顏色 */
+  .contextinput {
+    position: fixed; /* 設定絕對定位 */
+    width: 36%;
+    left: 52%;
+    height: 7.5%;
+    border: none;
+    outline: none;
+    background-color: var(--color-cadetblue-100);
+    border-radius: 0px var(--br-3xs) var(--br-3xs) 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-7xl) var(--padding-9xl);
+    box-sizing: border-box;
+    font-family: var(--font-roboto);
+    font-size: 2.5vh;
+    color: var(--color-gray);
+    max-width: 40%;
   }
   
   /* 滑鼠移入時的背景顏色 */
@@ -185,10 +191,12 @@ export default defineComponent({
   
   /* 發送按鈕圖標樣式 */
   .sendIcon {
-    width: 74px;
-    height: 74px;
-    position: relative;
+    width: 8%;
+    height: 8%;
+    position: absolute;
     overflow: hidden;
+    right: 3%;
+    bottom: 0.01%;
     flex-shrink: 0;
     cursor: pointer;
     z-index: 4;
@@ -205,7 +213,7 @@ export default defineComponent({
   
   /* 圖片上傳區域容器 */
   .imageUpload {
-    flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -213,8 +221,9 @@ export default defineComponent({
     flex-wrap: wrap;
     align-content: flex-end;
     gap: var(--gap-0);
-    row-gap: 20px;
+    row-gap: 1%;
     max-width: 100%;
+    height: 100%; /* 確保它有高度 */
   }
   
   /* 整體圖片輸入區域容器 */
@@ -227,6 +236,7 @@ export default defineComponent({
     padding: 0px var(--padding-24xl);
     box-sizing: border-box;
     max-width: 100%;
+    height: 100%;
   }
   /* 顯示檔案名稱的樣式 */
   .fileName {
@@ -235,10 +245,4 @@ export default defineComponent({
     color: var(--color-gray);
   }
 
-  /* 響應式設計，當螢幕寬度小於450px時，改變按鈕文字大小 */
-  @media screen and (max-width: 450px) {
-    .uploadThePicture {
-      font-size: var(--font-size-lgi);
-    }
-  }
 </style>

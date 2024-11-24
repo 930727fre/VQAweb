@@ -188,14 +188,14 @@
   }
   .fixedPictureInput {
     position: fixed;   /* 固定在視口中 */
-    bottom: 55px;      /* 距離底部 10px */
+    bottom: 5.5%;      /* 距離底部 10px */
   }
   .helpIcon {
-    position: absolute;
-    bottom: 100px;
-    left: 100px;
-    width: 32px;
-    height: 32px;
+    position: fixed;
+    bottom: 9.2%;
+    left: 5.2%;
+    width: 4%;
+    height: 2.9%;
     cursor: pointer;
     z-index: 4;
   }
