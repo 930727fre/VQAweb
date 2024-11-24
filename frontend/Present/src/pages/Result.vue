@@ -130,9 +130,9 @@ export default defineComponent({
     margin-bottom: 0.5%; 
   }
   .sendIcon {
-    position: absolute;
-    bottom: 1.2%;
-    right: 5%;
+    position: fixed;
+    right: 4.5%;
+    bottom: 4.7%;
     width: 8%;
     height: 8%;
     overflow: hidden;
