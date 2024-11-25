@@ -7,17 +7,19 @@
         <div :class="$style.backgroundParent">
           <div :class="$style.background" />
           <header :class="$style.top" />
-            <div :class="$style.outputArea">
+          <div :class="$style.outputArea">
             <!-- 顯示 question -->
-              <div :class="$style.qOutput">
-                {{ question }}
-                <!-- 圖片預覽 -->
-                <div v-if="image" class="image-preview">
-                  <img :src="image" alt="Uploaded Preview" />
-                  </div>
-                </div>
+            <div :class="$style.qOutput">
+              {{ question }}
+              <!-- 圖片預覽 -->
+              <div v-if="image" class="image-preview">
+                <img :src="image" alt="Uploaded Preview" />
+              </div>
+            </div>
             <!-- 顯示 answer -->
-              <section :class="$style.aOutput" rows="10" cols="28" />
+            <section :class="$style.aOutput">
+              {{ answer }}
+            </section>
           </div>
         </div>
         <img :class="$style.sendIcon" loading="lazy" alt="" src="/send.svg" />
@@ -39,7 +41,7 @@ export default defineComponent({
     // 從路由的 query 參數中取得 question 和 image
     const question = route.query.question as string || '';  // 取得問題內容
     const image = route.query.image as string || '';  // 取得圖片資料
-
+    const answer = "respond"; // 取得答案
     // 點擊時，跳轉回首頁
     const onResultContainerClick = () => {
       router.push("/");  // 跳轉到首頁
@@ -47,6 +49,7 @@ export default defineComponent({
 
     return {
       question,
+      answer,
       image,
       onResultContainerClick
     };
@@ -110,6 +113,13 @@ export default defineComponent({
     border-radius: var(--br-3xs);
     max-width: 100%;
     z-index: 2;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5vw;
+    color: #04010e;
+    padding: 0.5%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    margin-bottom: 0.5%;
   }
   /* question 的字體樣式 */
   .qOutput {
@@ -122,12 +132,12 @@ export default defineComponent({
     max-width: 100%;
     z-index: 2;
     font-family: 'Arial', sans-serif;
-    font-size: 2.7vw;
-    color: #3704c5;
+    font-size: 1.5vw;
+    color: #04010e;
     padding: 0.5%;
-    overflow-wrap: break-word; 
+    overflow-wrap: break-word;
     word-wrap: break-word;
-    margin-bottom: 0.5%; 
+    margin-bottom: 0.5%;
   }
   .sendIcon {
     position: fixed;
