@@ -1,18 +1,18 @@
 <template>
   <div :class="$style.tapQuest">
     <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
-    <main :class="$style.layout">
-      <div :class="$style.bb" />
+    <main :class="$style.layout"><!-- 主布局 -->
+      <div :class="$style.bb" /><!-- 對齊 -->
       <section :class="$style.contentArea">
-        <div :class="$style.background" />
+        <div :class="$style.background" /> <!-- 背景 -->
         <div :class="$style.questionInput">
           <header :class="$style.top" />
           <div :class="$style.outputAreaWrapper">
             <div :class="$style.outputArea">
-              <div :class="$style.qandA">
+              <div :class="$style.qandA"><!-- 問題輸出 -->
                 <section :class="$style.qOutput" rows="10" cols="28" />
               </div>
-              <section :class="$style.aOutput" rows="10" cols="28" />
+              <section :class="$style.aOutput" rows="10" cols="28" /><!-- 回答輸出 -->
             </div>
           </div>
         </div>
@@ -63,6 +63,82 @@
     object-fit: cover;/* 完全填滿其容器 */
     z-index: 3;/* 第三層(最上層) */
   }
+  .nextbutton {
+    position: fixed; /* Fixed position */
+    height: 19.1%;
+    width: 12.5%;
+    bottom: 20%; /* 10% from the bottom */
+    right: 10%; /* 10% from the right */
+    transform: none; /* Remove the previous transform */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden; /* Hide overflow */
+    object-fit: contain; /* Make sure the whole image fits inside the container */
+    z-index: 3; /* Keep it on top */
+}
+.frameChild1 {   /* arraow1*/
+  position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 45%;
+    /* 左右置中操作 */
+    right: 15%; /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-50%); /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;/* 超出則隱藏 */
+    object-fit: contain;/* 完全填滿其容器 */
+    z-index: 3;/* 第三層(最上層) */
+  }
+  .frameChild2 {   /* arraow2*/
+  position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 60%;
+    /* 左右置中操作 */
+    right: 45%; /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-50%); /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;/* 超出則隱藏 */
+    object-fit: contain;/* 完全填滿其容器 */
+    z-index: 3;/* 第三層(最上層) */
+  }
+  .instructions {
+    position: fixed;
+    width: 20.5%; /* Set a fixed width */
+    top: 70%; /* Center the box vertically */
+    right: 20%; /* Position it from the right */
+    transform: translate(-50%, -50%); /* Center it both vertically and horizontally */
+    font-size: 1vw; /* Font size relative to viewport width */
+    line-height: 1.2;
+    color: black; /* Black text color */
+    background-color: white; /* White background */
+    padding: 5px; /* Adds smaller padding to reduce extra space */
+    border-radius: 5px; /* Optional: rounded corners */
+    z-index: 2; 
+    overflow: hidden; /* Ensure text stays within the container */
+    
+    display: flex; /* Use flexbox to center content */
+    flex-direction: column; /* Arrange paragraphs vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    text-align: center; /* Align the text to the center */
+
+    height: auto; /* Allow the height to adjust based on content */
+    max-height: none; /* Don't limit the height */
+}
+
+
+
+
+
+
+
   .background {/* contextArea隱藏兒子 */
     align-self: stretch;/* 延伸它爸 */
     height: 93.7%;
@@ -204,7 +280,6 @@
     height: 100%;
     object-fit: contain;
   }
-
   @media screen and (min-width: 1200px) {
     .tapQuest {
       justify-content: space-between; /* 項目之間有間距 */

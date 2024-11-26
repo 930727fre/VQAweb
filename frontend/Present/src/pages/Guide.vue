@@ -1,194 +1,320 @@
 <template>
-  <div :class="$style.guide">
-    <div :class="$style.bb" />
-  
-    <header :class="$style.topParent">
-      <div :class="$style.top" />
-      <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
-    </header>
-    <main :class="$style.backgroundParent">
-      <div :class="$style.background" />
-     
-      <div :class="$style.qOutputParent">
-        <div :class="$style.qOutput" />
-        <img
-          :class="$style.frameChild"
-          loading="lazy"
-          alt="Arrow1"
-          src="/arrow-12@2x.png"
-        />
-      </div>
-      <div :class="$style.aOutputParent">
-        <div :class="$style.aOutput" />
-        <img
-          :class="$style.frameItem"
-          loading="lazy"
-          alt="Arrow2"
-          src="/arrow-13@2x.png"
-        />
-      </div>
-      <!-- 替換成 next.png -->
-      <img
-        :class="$style.nextButton"
-        loading="lazy"
-        alt="Next"
-        src="/next.png"
-        @click="goToGuideShow"
-      />
-      <!-- 新增描述文字 -->
-      <div :class="$style.instructions">
+  <div :class="$style.tapQuest">
+    <div 
+      :class="$style.eventMask" 
+      v-if="disableEvents"
+    ></div>
+    <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
+    <router-link :to="{ path: '/' }" :class="$style.nextbutton">
+      <img :class="$style.nextbutton" alt="" src="/next.png" />
+    </router-link>
+    <img :class="$style.frameChild1" alt="" src="/arrow-12@2x.png"/>
+    <img :class="$style.frameChild2" alt="" src="/arrow-13@2x.png" />
+    <!-- 新增描述文字 -->
+    <div :class="$style.instructions">
         <p>The words will show at right side.</p>
         <p>The answer given by the system will show at the left side.</p>
         <p>Press "Next" to move on.</p>
-      </div>
+    </div>
+    <main :class="$style.layout"><!-- 主布局 -->
+      <div :class="$style.bb" /><!-- 對其 -->
+      <section :class="$style.contentArea">
+        <div :class="$style.background" /> <!-- 背景 -->
+        <div :class="$style.questionInput">
+          <header :class="$style.top" />
+          <div :class="$style.outputAreaWrapper">
+            <div :class="$style.outputArea">
+              <div :class="$style.qandA"><!-- 問題輸出 -->
+                <section :class="$style.qOutput" rows="10" cols="28" />
+              </div>
+              <section :class="$style.aOutput" rows="10" cols="28" /><!-- 回答輸出 -->
+            </div>
+          </div>
+        </div>
+        <PictureInput :class="$style.fixedPictureInput" />
+      </section>
     </main>
   </div>
 </template>
 
-
 <script lang="ts">
-import { defineComponent } from "vue";
-import FrameComponent1 from "../components/FrameShow1.vue";
+  import { defineComponent } from "vue";
+  import PictureInput from "../components/PictureInput.vue";
 
-export default defineComponent({
-  name: "Guide",
-  components: { FrameComponent1 },
-  methods: {
-    goToGuideShow() {
-      this.$router.push({ name: "Normal" }); // 跳轉到名稱為 GuideShow 的路由
+  export default defineComponent({
+    name: "TapQuest",
+    components: { PictureInput },
+    data() {
+      return {
+        disableEvents: true, // 控制是否禁用所有事件
+      };
     },
-  },
-});
+  });
 </script>
 
-
-
-
 <style module>
-  .top {
-    position: absolute;
-    top: 24px;
-    left: 0px;
-    border-radius: var(--br-3xs);
-    background-color: var(--color-cadetblue-200);
-    width: 1840px;
-    height: 161px;
-    z-index: 2;
+  .eventMask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* 透明背景 */
+    z-index: 5; /* 放在所有其他元素之上 */
+    pointer-events: all; /* 拦截所有点击事件 */
   }
-  .logo1Icon { /*logo*/ 
-    position: absolute;
-    top: -9px;
-    left: 800px;
-    width: 240px;
-    height: 207px;
-    object-fit: cover;
-    z-index: 3;
-  }
-  .topParent { /*top*/
-    position: absolute;
-    top: 0px;
-    left: 40px;
-    width: 1840px;
-    height: 198px;
-  }
-  .qOutput { /* red1*/
-    position: absolute;
+  .bb {/* Frame上的背景(用於對齊) */
+    position: fixed;
     top: 0px;
     left: 0px;
-    border-radius: var(--br-3xs);
-    background-color: var(--color-lightcoral);
-    width: 567px;
-    height: 196px;
-    z-index: 2;
+    background-color: var(--color-lavenderblush);
+    width: 100%;
+    height: 100%;
+    display: none;
   }
-  .frameChild {   /* arraow1*/
-    position: absolute;
-    top: 127.2px;
-    left: 150.2px;
-    width: 184.5px;
-    height: 252.6px;
-    overflow: hidden;
-    object-fit: contain;
-    z-index: 3;
+  .logo1Icon {/* logo */
+    position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 1%;
+    bottom: 99%;
+    /* 左右置中操作 */
+    left: 50%; /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-50%); /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;/* 超出則隱藏 */
+    object-fit: cover;/* 完全填滿其容器 */
+    z-index: 3;/* 第三層(最上層) */
   }
-  .qOutputParent {
-    position: absolute;
-    top: 215px;
-    left: 1165px;
-    width: 567px;
-    height: 379.8px;
+  .nextbutton {
+    position: fixed; /* Fixed position */
+    height: 19.1%;
+    width: 12.5%;
+    bottom: 20%; /* 10% from the bottom */
+    right: 10%; /* 10% from the right */
+    transform: none; /* Remove the previous transform */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden; /* Hide overflow */
+    object-fit: contain; /* Make sure the whole image fits inside the container */
+    z-index: 6; /* 保证高于遮罩层 */
+    pointer-events: auto; /* 允许点击 */
+}
+.frameChild1 {   /* arraow1*/
+  position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 45%;
+    /* 左右置中操作 */
+    right: 15%; /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-50%); /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;/* 超出則隱藏 */
+    object-fit: contain;/* 完全填滿其容器 */
+    z-index: 3;/* 第三層(最上層) */
   }
-  .aOutput {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-radius: var(--br-3xs);
-    background-color: var(--color-mistyrose);
-    width: 567px;
-    height: 196px;
-    z-index: 3;
+  .frameChild2 {   /* arraow2*/
+  position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 60%;
+    /* 左右置中操作 */
+    right: 45%; /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-50%); /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;/* 超出則隱藏 */
+    object-fit: contain;/* 完全填滿其容器 */
+    z-index: 3;/* 第三層(最上層) */
   }
-  .frameItem {/*arraow2*/
-    position: absolute;
-    top: 96.4px;
-    left: 501.7px;
-    width: 332.5px;
-    height: 185.4px;
-    overflow: hidden;
-    object-fit: contain;
-    z-index: 4;
+  .instructions {
+    position: fixed;
+    width: 20.5%; /* Set a fixed width */
+    top: 70%; /* Center the box vertically */
+    right: 20%; /* Position it from the right */
+    transform: translate(-50%, -50%); /* Center it both vertically and horizontally */
+    font-size: 1vw; /* Font size relative to viewport width */
+    line-height: 1.2;
+    color: black; /* Black text color */
+    background-color: white; /* White background */
+    padding: 5px; /* Adds smaller padding to reduce extra space */
+    border-radius: 5px; /* Optional: rounded corners */
+    z-index: 2; 
+    overflow: hidden; /* Ensure text stays within the container */
+    
+    display: flex; /* Use flexbox to center content */
+    flex-direction: column; /* Arrange paragraphs vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    text-align: center; /* Align the text to the center */
+
+    height: auto; /* Allow the height to adjust based on content */
+    max-height: none; /* Don't limit the height */
   }
-  .aOutputParent {
-    position: absolute;
-    top: 427px;
-    left: 136px;
-    width: 834.2px;
-    height: 281.8px;
-  }
-  .backgroundParent {
-    position: absolute;
-    top: 24px;
-    left: 40px;
+
+  .background {/* contextArea隱藏兒子 */
+    align-self: stretch;/* 延伸它爸 */
+    height: 93.7%;
+    position: relative;
     box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
     border-radius: var(--br-3xs);
     background-color: var(--color-gainsboro);
-    width: 1840px;
-    height: 1013px;
+    display: none;
+  }
+  .qOutput {/* Q顯示區塊 */
+    position: fixed; /* 設定絕對定位 */
+    top: 25%;  /* 距離父元素頂部的 25% */
+    left: 60%; /* 距離父元素左側的 60% */
+    width: 30%;  /* 設定寬度為 30% */
+    height: 25%; /* 設定高度為 25% */
+    background-color: var(--color-lightcoral);
+    border-radius: var(--br-3xs);
     max-width: 100%;
-    z-index: 1;
+    z-index: 2;
   }
-  
-  .guide {
-    width: 100%;
-    height: 1080px;
+  .qandA {/* QA顯示group */
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    max-width: 100%;
+    height: 100%;
+  }
+  .aOutput {/* A顯示區塊 */
+    position: fixed; /* 設定絕對定位 */
+    top: 53%;  /* 距離父元素頂部的 50% */
+    left: 10%; /* 距離父元素左側的 15% */
+    width: 30%;  /* 設定寬度為 30% */
+    height: 25%; /* 設定高度為 25% */
+    background-color: var(--color-mistyrose);
+    border-radius: var(--br-3xs);
+    max-width: 100%;
+    z-index: 2;
+  }
+  .outputArea { /* 輸出格與邊間距 */
+    width: 93%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+    max-width: 100%;
+  }
+  .top {/*標題槓 */
+    align-self: stretch;
+    height: 18vh;
     position: relative;
-    background-color: var(--color-lavenderblush);
-    overflow: hidden;
-    line-height: normal;
-    letter-spacing: normal;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-cadetblue-200);
+    z-index: 2;
   }
-  .nextButton {
-    position: absolute;
-    top: 550px; /* 可根據需求調整位置 */
-    left: 1450px; /* 可根據需求調整位置 */
-    width: 200px; /* 控制圖片大小 */
-    height: 252px; /* 控制圖片大小 */
-    object-fit: contain; /* 確保圖片按比例縮放 */
-    z-index: 3;
+  .outputAreaWrapper {/* 輸出區塊 */
+    align-self: stretch;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0px var(--padding-xl);
+    box-sizing: border-box;
+    max-width: 100%;
+    height: 29vh;
   }
-  .instructions {
-    position: absolute;
-    top: 600px; /* 調整文字說明的位置 */
-    left: 1000px; /* 調整文字說明的位置 */
-    width: 300px; /* 控制文字容器寬度 */
-    text-align: center; /* 居中對齊 */
-    font-size: 18px; /* 設定文字大小 */
-    color: #333; /* 設定文字顏色 */
-    font-family: Arial, sans-serif; /* 字體設定 */
+  .questionInput {/* contextArea隱藏二兒子 */
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-35xl);
+    max-width: 100%;
+  }
+  .contentArea {/* 禿出來的灰板子 */
+    position: fixed;
+    /* 留縫 */
+    top: 2.5%;
+    bottom: 2.5%;
+    left: 2%;
+    right: 2%;
+    /* 加陰影、圓弧、顏色 */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-3xs);
+    background-color: var(--color-gainsboro);
+    /* 板子寬度 */
+    width: 96%;
+    /* 可當爸 */
+    display: flex;
+    flex-direction: column;/* 橫向元素排列 */
+    align-items: flex-end;/* 垂直居下對齊 */
+    justify-content: flex-start;/* 水平居上對齊 */
+    padding: 0px 0px var(--padding-25xl);/* 元素內邊距 */
+    box-sizing: border-box;/* 控制元素寬度和高度 */
+    gap: var(--gap-246xl);/* 設置 flexbox 或 grid 布局中子元素之間間距 */
+    max-width: 100%;
+    z-index: 1;/* 第一層 */
+  }
+  .layout {/* Frame上的背景 */
+    height: 100%;/* 相對.tapQuest，100%高度 */
+    flex: 1;/* 第一層 */
+    position: relative;/* 相對定位 */
+    background-color: var(--color-lavenderblush);/* 顏色 */
+    overflow: hidden;/* 超出則隱藏 */
+    max-width: 100%;/* 相對.tapQuest，100%高度 */
+  }
+  .tapQuest {/* 白色Frame */
+    width: 100%;/* 100%寬度 */
+    height: 100vh;/* 100vh高度 */
+    position: relative;/* 相對定位 */
+    display: flex;/* 子元素按此元素排列 */
+    flex-direction: row;/* 橫向元素排列 */
+    justify-content: center; /* 水平居中對齊 */
+    align-items: center; /* 垂直居中對齊 */
+    line-height: normal;/* 正常行高 */
+    letter-spacing: normal;/* 正常字母間距 */
+  }
+  .fixedPictureInput {
+    position: fixed;   /* 固定在視口中 */
+    bottom: 5.5%;      /* 距離底部 10px */
+  }
+  .helpIcon {
+    position: fixed;
+    bottom: 9.2%;
+    left: 5.2%;
+    width: 4%;
+    height: 2.9%;
+    cursor: pointer;
     z-index: 4;
-    background: rgba(255, 255, 255, 0.8); /* 半透明背景提高可讀性 */
-    padding: 10px 20px; /* 增加內邊距 */
-    border-radius: 8px; /* 圓角效果 */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+  }
+  .helpIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  @media screen and (min-width: 1200px) {
+    .tapQuest {
+      justify-content: space-between; /* 項目之間有間距 */
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    
+  }
+
+  @media screen and (max-width: 767px) {
+    .tapQuest {
+      flex-direction: column; /* 改為縱向排列 */
+      height: auto; /* 讓高度自動調整 */
+    }
   }
 </style>

@@ -7,8 +7,6 @@ import Guide from "./pages/Guide.vue";
 import GuideShow from "./pages/GuideShow.vue";
 import "./global.css";
 
-
-
 interface Route {
   path: string;
   name: string;
