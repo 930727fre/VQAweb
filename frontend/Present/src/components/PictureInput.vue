@@ -40,6 +40,9 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
+import axios from 'axios';
+
+const frontend_port = 3000
 
 export default defineComponent({
   name: "PictureInput",
@@ -70,8 +73,31 @@ export default defineComponent({
       }
     };
 
+    const sendDataToBackend = async (imageFile: File, inputText: string) => {
+      const formData = new FormData();
+      formData.append("image", imageFile); // input圖片
+      formData.append("text", inputText); // input文字
+
+      try {
+        const response = await axios.post(`http://localhost:${frontend_port}/upload`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // 告訴後端這是表單數據
+          },
+        });
+        console.log("後端回應：", response.data.reponse); // 處理後端回應
+      } catch (error) {
+        console.error("發送資料到後端時出現錯誤：", error);
+      }
+    };
+
     // 發送按鈕的點擊事件
     const onSendClick = () => {
+      if (!question.value || !fileInputRef.value?.files?.[0]) {
+        console.log("請選擇圖片並輸入問題");
+        return;
+      }
+      const imageFile = fileInputRef.value.files[0]; // 取得選擇的圖片檔案
+      sendDataToBackend(imageFile, question.value); // 發送資料到後端
       router.push({
         path: '/result',
         query: {
