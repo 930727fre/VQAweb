@@ -41,7 +41,7 @@ export default defineComponent({
     // 從路由的 query 參數中取得 question 和 image
     const question = route.query.question as string || '';  // 取得問題內容
     const image = route.query.image as string || '';  // 取得圖片資料
-    const answer = "respond"; // 取得答案
+    const answer = route.query.answer as string || 'No result.'; // 取得答案
     // 點擊時，跳轉回首頁
     const onResultContainerClick = () => {
       router.push("/");  // 跳轉到首頁
