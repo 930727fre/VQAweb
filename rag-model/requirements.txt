@@ -1,8 +1,0 @@
-transformers==4.33.2      # For working with pretrained language models (latest release)
-torch==2.0.1              # PyTorch for deep learning tasks and model execution
-faiss-cpu==1.7.4          # FAISS library for efficient similarity search and clustering (CPU version)
-datasets==2.14.5          # Hugging Face Datasets for handling text datasets
-sentence-transformers==2.2.2  # For embedding-based retrieval tasks (latest release)
-scikit-learn==1.3.0       # For general ML tasks such as vectorization, clustering, etc.
-numpy==1.24.4             # For numerical operations and array manipulations
-nltk==3.8.0               # Natural Language Toolkit for NLP tasks
