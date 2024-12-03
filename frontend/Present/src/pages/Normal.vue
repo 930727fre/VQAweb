@@ -60,7 +60,7 @@
     max-width: 100%;
     max-height: 100%;
     overflow: hidden;/* 超出則隱藏 */
-    object-fit: cover;/* 完全填滿其容器 */
+    object-fit: contain;/* 完全填滿其容器 */
     z-index: 3;/* 第三層(最上層) */
   }
   .nextbutton {
@@ -287,13 +287,18 @@
   }
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {
-    
+    .logo1Icon {/* logo */
+      transform: translateX(-50%) scale(2); /*放大logo比例*/
+    }
   }
 
   @media screen and (max-width: 767px) {
     .tapQuest {
       flex-direction: column; /* 改為縱向排列 */
       height: auto; /* 讓高度自動調整 */
+    }
+    .logo1Icon {/* logo */
+      transform: translateX(-50%) scale(3); /*放大logo比例*/
     }
   }
 </style>
