@@ -45,7 +45,7 @@ router.beforeEach((toRoute, _, next) => {
   const metaTitle = toRoute?.meta?.title as string;
   const metaDesc = toRoute?.meta?.description as string;
 
-  window.document.title = metaTitle || "Present";
+  window.document.title = metaTitle || "VQAweb";
   if (metaDesc) {
     addMetaTag(metaDesc);
   }

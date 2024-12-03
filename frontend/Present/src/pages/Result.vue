@@ -68,8 +68,6 @@ export default defineComponent({
 .image-preview img {
   max-width: 60.8%; /* 限制圖片的最大寬度 */
   max-height: 37%; /* 限制圖片的最大高度 */
-  min-width: 60.8%; /* 限制圖片的最大寬度 */
-  min-height: 37%; /* 限制圖片的最大高度 */
   width: auto; /* 確保寬高比例 */
   height: auto; /* 確保寬高比例 */
   object-fit: contain; /* 保持圖片內容完整可見 */
@@ -196,7 +194,7 @@ export default defineComponent({
     max-width: 100%;
     max-height: 100%;
     overflow: hidden;/* 超出則隱藏 */
-    object-fit: cover;/* 完全填滿其容器 */
+    object-fit: contain;/* 完全填滿其容器 */
     z-index: 3;/* 第三層(最上層) */
   }
   .frameParent {
@@ -232,13 +230,30 @@ export default defineComponent({
   }
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {
-    
+    .qOutput{
+      font-size: 3.5vw;
+    }
+    .aOutput{
+      font-size: 3.5vw;
+    }
+    .logo1Icon {/* logo */
+      transform: translateX(-50%) scale(2); /*放大logo比例*/
+    } 
   }
 
   @media screen and (max-width: 767px) {
     .result {
       flex-direction: column; /* 改為縱向排列 */
       height: auto; /* 讓高度自動調整 */
+    }
+    .qOutput{
+      font-size: 4.5vw;
+    }
+    .aOutput{
+      font-size: 4.5vw;
+    }
+    .logo1Icon {/* logo */
+      transform: translateX(-50%) scale(3); /*放大logo比例*/
     }
   }
 </style>
