@@ -68,8 +68,6 @@ export default defineComponent({
 .image-preview img {
   max-width: 60.8%; /* 限制圖片的最大寬度 */
   max-height: 37%; /* 限制圖片的最大高度 */
-  min-width: 60.8%; /* 限制圖片的最大寬度 */
-  min-height: 37%; /* 限制圖片的最大高度 */
   width: auto; /* 確保寬高比例 */
   height: auto; /* 確保寬高比例 */
   object-fit: contain; /* 保持圖片內容完整可見 */
