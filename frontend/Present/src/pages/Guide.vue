@@ -13,7 +13,7 @@
     <!-- 新增描述文字 -->
     <div :class="$style.instructions">
         <p>The words will show at right side.</p>
-        <p>The answer given by the system will show at the left side.</p>
+        <p>The answer given will show at left side.</p>
         <p>Press "Next" to move on.</p>
     </div>
     <main :class="$style.layout"><!-- 主布局 -->
@@ -138,10 +138,9 @@
   .instructions {
     position: fixed;
     width: 20.5%; /* Set a fixed width */
-    top: 70%; /* Center the box vertically */
+    top: 68%; /* Center the box vertically */
     right: 20%; /* Position it from the right */
     transform: translate(-50%, -50%); /* Center it both vertically and horizontally */
-    font-size: 1vw; /* Font size relative to viewport width */
     line-height: 1.2;
     color: black; /* Black text color */
     background-color: white; /* White background */
@@ -158,6 +157,7 @@
 
     height: auto; /* Allow the height to adjust based on content */
     max-height: none; /* Don't limit the height */
+    font-size: clamp(3rem, 8vw + 0.1rem, 4rem);
   }
 
   .background {/* contextArea隱藏兒子 */
@@ -305,11 +305,17 @@
     .tapQuest {
       justify-content: space-between; /* 項目之間有間距 */
     }
+    .instructions{
+      font-size: clamp(3rem, 4vw + 0.1rem, 4rem);
+    }
   }
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(2); /*放大logo比例*/
+    } 
+    .instructions{
+      font-size: clamp(2rem, 4vw + 0.1rem, 3.5rem);
     }
   }
 
@@ -320,6 +326,9 @@
     }
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(3); /*放大logo比例*/
+    }
+    .instructions{
+      font-size: clamp(2rem, 4vw + 0.1rem, 3rem);
     }
   }
 </style>
