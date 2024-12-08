@@ -13,8 +13,8 @@
     <img :class="$style.frameChild2" alt="" src="/arrow-131@2x.png" />
     <!-- 新增描述文字 -->
     <div :class="$style.instructions">
-        <p>You can input your picture at left side.</p>
-        <p>Type in your question at right side.</p>
+        <p>You can input picture at left side.</p>
+        <p>Type your question at right side.</p>
         <p>Press "Next" to move on.</p>
     </div>
     <main :class="$style.layout"><!-- 主布局 -->
@@ -186,6 +186,7 @@
 
     height: auto; /* Allow the height to adjust based on content */
     max-height: none; /* Don't limit the height */
+    font-size: clamp(3rem, 4vw + 0.1rem, 4rem);
   }
   .background {/* contextArea隱藏兒子 */
     align-self: stretch;/* 延伸它爸 */
@@ -332,12 +333,34 @@
     .tapQuest {
       justify-content: space-between; /* 項目之間有間距 */
     }
+    .instructions{
+      font-size: clamp(3rem, 4vw + 0.1rem, 4.5rem);
+    }
+    
   }
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(2); /*放大logo比例*/
     }   
+    .frameChild1 {   
+      height: 16%;
+      width: 10%;
+      top: 75%;
+      right: 20%;
+      transform: translateX(-50%);
+    }
+
+    .frameChild2 {   
+      height: 20%;
+      width: 18%;
+      top: 73%;
+      right: 40%;
+      transform: translateX(-50%);
+    }
+    .instructions{
+      font-size: clamp(2rem, 4vw + 0.1rem, 3.5rem);
+    }
   }
 
   @media screen and (max-width: 767px) {
@@ -347,6 +370,26 @@
     }
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(3); /*放大logo比例*/
+    }
+    .frameChild1 {   
+      height: 18.1%;
+      width: 12.5%;
+      top: 72%;
+      /* 左右置中操作 */
+      right: 15%; /* 讓左邊界在父容器寬度的 50% */
+    }
+    .frameChild2 {   
+      height: 25.1%;
+      width: 24.5%;
+      top: 70%;
+      right: 35%;
+      
+    }
+    .nextbutton{
+      right: 5%;
+    }
+    .instructions{
+      font-size: clamp(2rem, 4vw + 0.1rem, 3rem);
     }
   }
 </style>
