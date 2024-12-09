@@ -138,9 +138,10 @@
   .instructions {
     position: fixed;
     width: 20.5%; /* Set a fixed width */
-    top: 68%; /* Center the box vertically */
+    top: 70%; /* Center the box vertically */
     right: 20%; /* Position it from the right */
     transform: translate(-50%, -50%); /* Center it both vertically and horizontally */
+    font-size: 1vw; /* Font size relative to viewport width */
     line-height: 1.2;
     color: black; /* Black text color */
     background-color: white; /* White background */
@@ -157,7 +158,6 @@
 
     height: auto; /* Allow the height to adjust based on content */
     max-height: none; /* Don't limit the height */
-    font-size: clamp(3rem, 8vw + 0.1rem, 4rem);
   }
 
   .background {/* contextArea隱藏兒子 */
@@ -305,9 +305,6 @@
     .tapQuest {
       justify-content: space-between; /* 項目之間有間距 */
     }
-    .instructions{
-      font-size: clamp(3rem, 4vw + 0.1rem, 4.5rem);
-    }
   }
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {
@@ -315,7 +312,7 @@
       transform: translateX(-50%) scale(2); /*放大logo比例*/
     } 
     .instructions{
-      font-size: clamp(2rem, 4vw + 0.1rem, 3.5rem);
+      font-size: clamp(1rem, 1.5vw + 0.1rem, 2rem);
     }
   }
 
@@ -328,7 +325,12 @@
       transform: translateX(-50%) scale(3); /*放大logo比例*/
     }
     .instructions{
-      font-size: clamp(2rem, 4vw + 0.1rem, 3rem);
+      font-size: clamp(0.9rem, 1.5vw + 0.1rem, 2rem);
+    }
+  }
+  @media screen and (max-width: 368px) {
+    .instructions{
+      font-size: clamp(0.7rem, 1.5vw + 0.05rem, 1.5rem);
     }
   }
 </style>
