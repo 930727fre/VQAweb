@@ -169,7 +169,7 @@
     top: 60%; /* Center the box vertically */
     right: 20%; /* Position it from the right */
     transform: translate(-50%, -50%); /* Center it both vertically and horizontally */
-    font-size: 1vw; /* Font size relative to viewport width */
+    font-size: 1.3vw; /* Font size relative to viewport width */
     line-height: 1.2;
     color: black; /* Black text color */
     background-color: white; /* White background */
@@ -186,7 +186,6 @@
 
     height: auto; /* Allow the height to adjust based on content */
     max-height: none; /* Don't limit the height */
-    
   }
   .background {/* contextArea隱藏兒子 */
     align-self: stretch;/* 延伸它爸 */
@@ -311,6 +310,7 @@
     line-height: normal;/* 正常行高 */
     letter-spacing: normal;/* 正常字母間距 */
   }
+
   .fixedPictureInput {
     position: fixed;   /* 固定在視口中 */
     bottom: 5.5%;      /* 距離底部 10px */
@@ -355,7 +355,7 @@
       transform: translateX(-50%);
     }
     .instructions{
-      font-size: clamp(1rem, 1.5vw + 0.1rem, 2rem);
+      font-size: 2vw;
     }
   }
 
@@ -385,12 +385,13 @@
       right: 5%;
     }
     .instructions{
-      font-size: clamp(0.9rem, 1.5vw + 0.1rem, 2rem);
+      font-size: 2.5vw;
     }
   }
+  
   @media screen and (max-width: 368px){
     .instructions{
-      font-size: clamp(0.7rem, 1.5vw + 0.05rem, 1.5rem);
+      font-size: 3vw;
     }
   }
 </style>

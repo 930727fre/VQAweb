@@ -312,7 +312,7 @@
       transform: translateX(-50%) scale(2); /*放大logo比例*/
     } 
     .instructions{
-      font-size: clamp(1rem, 1.5vw + 0.1rem, 2rem);
+      font-size: 2vw;
     }
   }
 
@@ -325,12 +325,12 @@
       transform: translateX(-50%) scale(3); /*放大logo比例*/
     }
     .instructions{
-      font-size: clamp(0.9rem, 1.5vw + 0.1rem, 2rem);
+      font-size: 2.5vw;
     }
   }
   @media screen and (max-width: 368px) {
     .instructions{
-      font-size: clamp(0.7rem, 1.5vw + 0.05rem, 1.5rem);
+      font-size: 3vw;
     }
   }
 </style>
