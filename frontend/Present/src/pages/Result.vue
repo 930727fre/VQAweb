@@ -106,7 +106,8 @@ export default defineComponent({
     top: 53%;  /* 距離父元素頂部的 50% */
     left: 10%; /* 距離父元素左側的 15% */
     width: 30%;  /* 設定寬度為 30% */
-    height: 25%; /* 設定高度為 25% */
+    min-height: 25%; /* 設定高度為 25% */
+    max-height: auto;
     background-color: var(--color-mistyrose);
     border-radius: var(--br-3xs);
     max-width: 100%;
