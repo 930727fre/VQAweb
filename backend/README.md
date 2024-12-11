@@ -6,3 +6,5 @@ To perform a demo without API (simply testing if RAG works fine)
 To perform a formal test (fastAPI + RAG)
 1. Run `VQAweb/backend/ollama-docker.sh` to start all models
 2. Run `VQAweb/backend/backend.sh`
+
+Note: `sky.h5` and `air_v100.h5` should be stored at `VQAweb/backend`
