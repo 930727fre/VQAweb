@@ -7,7 +7,7 @@ from sky_test_v1 import validate_image  # Import your validation function
 from model_v3 import air_pridiction  # Import your prediction function
 
 # Load the image locally
-image_path = "./pic.png"
+image_path = "./pic.jpg"
 
 try:
     # Open the image file in binary mode
