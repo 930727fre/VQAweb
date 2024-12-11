@@ -140,7 +140,7 @@ class ContentGenerator:
             return f"Error generating response: {str(e)}"
 
 
-def query_and_generate(vectorstore, generator: ContentGenerator, query: str, k: int = 3):
+def query_and_generate(vectorstore, generator: ContentGenerator, query: str, k: int = 3, cnn_result: str = None):
     if not vectorstore:
         print("Vector store is not available for querying")
         return "Vector store is not available for querying"
@@ -162,7 +162,10 @@ def query_and_generate(vectorstore, generator: ContentGenerator, query: str, k: 
             
         # Extract documents from results
         documents = [doc for doc, score in relevance_results]
-        
+        # print("ddocs")
+        # print(documents)
+        # print("ddocs")
+
         # Generate response using the documents as context
         response = generator.generate_response(query, documents)
         
@@ -284,7 +287,7 @@ def create_or_load_vectorstore(urls: List[str], force_reprocess: bool = False):
         print(f"Full traceback: {traceback.format_exc()}")
         return None, False
 
-def initialize(query):
+def initialize(query, cnn_result): 
     # List of URLs to process
     urls = [
         "https://www.who.int/news-room/feature-stories/detail/what-are-the-who-air-quality-guidelines",
@@ -300,13 +303,15 @@ def initialize(query):
     
     # Create or load the vector store, forcing reprocessing
     vectorstore, is_new = create_or_load_vectorstore(urls, force_reprocess=False)
-    
+    if cnn_result:
+       query += "\nGiven the current air pollution data of:"
+       query += cnn_result
+
     if vectorstore:
         if is_new:
             print("Vector store updated with new content.")
         else:
             print("Using existing vector store.")
-        
         return query_and_generate(vectorstore, generator, query)
     else:
         return "Failed to create/load vector store. Cannot process queries."

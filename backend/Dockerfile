@@ -10,4 +10,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # The CMD will run the main.py script, which is mounted via -v
-CMD ["python3", "main.py"]
+CMD ["python3", "demo.py"]

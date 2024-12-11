@@ -9,3 +9,7 @@ bs4
 requests
 langchain_ollama
 pandas
+tensorflow
+keras
+numpy
+pillow
