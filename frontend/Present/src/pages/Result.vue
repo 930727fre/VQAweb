@@ -119,17 +119,19 @@ export default defineComponent({
     overflow-y: auto;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    white-space: pre-wrap;
     margin-bottom: 0.5%;
   }
   /* question 的字體樣式 */
   .qOutput {
     position: fixed; /* 設定絕對定位 */
     top: 25%;  /* 距離父元素頂部的 25% */
-    left: 60%; /* 距離父元素左側的 60% */
+    left: 55%; /* 距離父元素左側的 60% */
     width: 35%;  /* 設定寬度為 30% */
     background-color: var(--color-lightcoral);
     border-radius: var(--br-3xs);
     max-width: 100%;
+    max-height : 45%;
     z-index: 2;
     font-family: 'Arial', sans-serif;
     font-size: 1.5vw;
