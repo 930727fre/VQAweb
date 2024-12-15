@@ -46,7 +46,7 @@
     </div>
     <div v-if="isinputquestion" :class="$style.inputquestionModal">
       <div :class="$style.modalContent">
-        <p>Please input question</p>
+        <p>Please input question and upload picture!</p>
       </div>
     </div>
   </div>
@@ -133,19 +133,19 @@
     const imageFile = fileInputRef.value?.files?.[0];
     const inputText = question.value;
     // Optional: Add a check to ensure at least one input is provided
-    if(!imageFile){
-      isuploadpicture.value = true;
-      console.log("請至少選擇圖片或輸入文字");
-    }
-    else if (!inputText) {
-      isuploadpicture.value = false;
+    // if(!imageFile){
+    //   isuploadpicture.value = true;
+    //   console.log("請至少選擇圖片或輸入文字");
+    // }
+    if (!inputText && !imageFile) {
+      // isuploadpicture.value = false;
       isinputquestion.value = true;
       console.log("請至少選擇圖片或輸入文字");
       return;
     }
     else{
       isProcessing.value = true; // 顯示「系統正在運算中」提示框
-      isuploadpicture.value = false;
+      // isuploadpicture.value = false;
       isinputquestion.value = false;
       sendDataToBackend(imageFile, inputText); 
     }
@@ -156,6 +156,8 @@
  
     // 觸發檔案輸入框的點擊事件
     const triggerFileInput = () => {
+      isuploadpicture.value = false;
+      isinputquestion.value = false;
       fileInputRef.value?.click(); // 使用 ref 來觸發檔案輸入框的點擊
     };
  
@@ -363,9 +365,4 @@
  
  
  </style>
- 
- 
- 
- 
- 
  
