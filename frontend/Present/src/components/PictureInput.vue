@@ -201,6 +201,7 @@
   font-size: 18px;
   color: rgb(238, 243, 239);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 7;
  }
  .uploadModal{
     position: fixed;
@@ -364,5 +365,6 @@
   }
  
  
- </style>
+ 
+</style>
  

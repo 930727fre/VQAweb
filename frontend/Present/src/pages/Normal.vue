@@ -265,6 +265,7 @@
   .fixedPictureInput {
     position: fixed;   /* 固定在視口中 */
     bottom: 5.5%;      /* 距離底部 10px */
+    z-index: 3;
   }
   .helpIcon {
     position: fixed;
