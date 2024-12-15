@@ -8,7 +8,7 @@
           :class="$style.uploadThePicture"
           type="file"
           accept="image/*"
-          @change="onFileChange" 
+          @change="onFileChange"
         />
         <!-- 自定義的選擇按鈕，顯示檔案名稱 -->
         <div :class="$style.customUploadButton" @click="triggerFileInput">
@@ -20,7 +20,7 @@
       <input
         v-model="question"
         :class="$style.contextinput "
-        placeholder="Type your Question"  
+        placeholder="Type your Question" 
         type="text"
       />
       <div :class="$style.submitButton">
@@ -30,33 +30,55 @@
           loading="lazy"
           alt="send icon"
           src="/send.svg"
-          @click="onSendClick"  
+          @click="onSendClick" 
         />
       </div>
     </div>
+    <div v-if="isProcessing" :class="$style.processingModal">
+      <div :class="$style.modalContent">
+        <p>Input successful! Please wait a few seconds</p>
+      </div>
+    </div>
+    <div v-if="isuploadpicture" :class="$style.uploadModal">
+      <div :class="$style.modalContent">
+        <p>Please upload picture!</p>
+      </div>
+    </div>
+    <div v-if="isinputquestion" :class="$style.inputquestionModal">
+      <div :class="$style.modalContent">
+        <p>Please input question</p>
+      </div>
+    </div>
   </div>
-</template>
-
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
-import axios from 'axios';
-
-export default defineComponent({
+  </template>
+ 
+ 
+ <script lang="ts">
+ import { defineComponent, ref } from "vue";
+ import { useRouter } from "vue-router";
+ import axios from 'axios';
+ 
+ 
+ export default defineComponent({
   name: "PictureInput",
   setup() {
+    const isProcessing = ref(false);
+    const isuploadpicture = ref(false);
+    const isinputquestion = ref(false);
     const fileInputRef = ref<HTMLInputElement | null>(null);
     const router = useRouter();
     const question = ref(""); // 用戶輸入的問題
     const selectedImage = ref<string | null>(null); // 存儲上傳的圖片數據
     const fileName = ref<string | null>(null); // 存儲圖片檔名
     const response = ref("");
-
+ 
+ 
     // 處理檔案變更事件
     const onFileChange = (event: Event) => {
       const input = event.target as HTMLInputElement;
       const file = input.files ? input.files[0] : null;
-
+ 
+ 
       if (file) {
         fileName.value = file.name;
         // 使用 FileReader 將圖片轉為 Base64 格式
@@ -70,10 +92,12 @@ export default defineComponent({
         console.log("未選擇圖片文件");
       }
     };
-
+ 
+ 
     const sendDataToBackend = async (imageFile?: File, inputText?: string) => {
     const formData = new FormData();
-
+ 
+ 
     // Only append if values are present
     if (imageFile) {
       formData.append("image", imageFile);
@@ -81,7 +105,8 @@ export default defineComponent({
     if (inputText) {
       formData.append("text", inputText);
     }
-
+ 
+ 
     try {
       const response = await axios.post(`http://localhost:8000/api/upload`, formData, {
         headers: {
@@ -101,41 +126,104 @@ export default defineComponent({
       console.error("發送資料到後端時出現錯誤：", error);
     }
   };
-
+ 
+ 
   // 發送按鈕的點擊事件
   const onSendClick = () => {
     const imageFile = fileInputRef.value?.files?.[0];
     const inputText = question.value;
-
     // Optional: Add a check to ensure at least one input is provided
-    if (!imageFile && !inputText) {
+    if(!imageFile){
+      isuploadpicture.value = true;
+      console.log("請至少選擇圖片或輸入文字");
+    }
+    else if (!inputText) {
+      isuploadpicture.value = false;
+      isinputquestion.value = true;
       console.log("請至少選擇圖片或輸入文字");
       return;
     }
-
-    sendDataToBackend(imageFile, inputText);
+    else{
+      isProcessing.value = true; // 顯示「系統正在運算中」提示框
+      isuploadpicture.value = false;
+      isinputquestion.value = false;
+      sendDataToBackend(imageFile, inputText); 
+    }
   };
-
-
+ 
+ 
+ 
+ 
     // 觸發檔案輸入框的點擊事件
     const triggerFileInput = () => {
       fileInputRef.value?.click(); // 使用 ref 來觸發檔案輸入框的點擊
     };
-
+ 
+ 
     return {
       question,
       selectedImage,
       onFileChange,
       onSendClick,
       triggerFileInput,
-      fileInputRef,  
+      fileInputRef, 
       fileName,
+      isProcessing,
+      isuploadpicture,
+      isinputquestion,
     };
   },
-});
-</script>
-
-<style module>
+ });
+ </script>
+ 
+ 
+ <style module>
+  .processingModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(165, 165, 165, 0.5); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 6; /* 保證層級最高 */
+  }
+  .modalContent {
+  background-color: rgb(0, 5, 1);
+  padding: 5px 10px;
+  border-radius: var(--br-3xs);
+  text-align: center;
+  font-family: var(--font-roboto);
+  font-size: 18px;
+  color: rgb(238, 243, 239);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+ }
+ .uploadModal{
+    position: fixed;
+    top: 40%;
+    left: 0%;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* 保證層級最高 */
+  }
+ .inputquestionModal {
+    position: fixed;
+    top: 40%;
+    left: 0%;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+  }
   /* 整體圖片輸入區域 */
   .picInput {
     position: absolute;
@@ -147,19 +235,16 @@ export default defineComponent({
     height: 100%;
     cursor: pointer;
   }
-  
-  /* 隱藏原始檔案選擇框 */
+   /* 隱藏原始檔案選擇框 */
   .uploadThePicture {
     display: none;
   }
-  
   
   /* 滑鼠移入時的背景顏色 */
   .customUploadButton:hover {
     background-color: var(--color-skyblue);
   }
-  
-  /* 輸入框容器 */
+   /* 輸入框容器 */
   .forInputPic {
     height: 7.5%;
     width: 39%;
@@ -219,13 +304,11 @@ export default defineComponent({
     color: var(--color-gray);
     max-width: 40%;
   }
-  
-  /* 滑鼠移入時的背景顏色 */
+   /* 滑鼠移入時的背景顏色 */
   .contextinput:hover {
     background-color: var(--color-skyblue);
   }
-  
-  /* 發送按鈕圖標樣式 */
+   /* 發送按鈕圖標樣式 */
   .sendIcon {
     width: 8%;
     height: 8%;
@@ -237,8 +320,7 @@ export default defineComponent({
     cursor: pointer;
     z-index: 4;
   }
-  
-  /* 按鈕容器 */
+   /* 按鈕容器 */
   .submitButton {
     display: flex;
     flex-direction: column;
@@ -246,8 +328,7 @@ export default defineComponent({
     justify-content: flex-end;
     padding: 0px 0px var(--padding-10xs);
   }
-  
-  /* 圖片上傳區域容器 */
+   /* 圖片上傳區域容器 */
   .imageUpload {
     width: 100%;
     display: flex;
@@ -261,8 +342,7 @@ export default defineComponent({
     max-width: 100%;
     height: 100%; /* 確保它有高度 */
   }
-  
-  /* 整體圖片輸入區域容器 */
+   /* 整體圖片輸入區域容器 */
   .pictureInput {
     width: 90.5%;
     display: flex;
@@ -280,5 +360,12 @@ export default defineComponent({
     font-size: var(--font-size-md);
     color: var(--color-gray);
   }
-
-</style>
+ 
+ 
+ </style>
+ 
+ 
+ 
+ 
+ 
+ 
