@@ -108,7 +108,7 @@
  
  
     try {
-      const response = await axios.post(`http://35.209.180.73:8000/api/upload`, formData, {
+      const response = await axios.post(`http://localhost:8000/api/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
