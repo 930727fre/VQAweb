@@ -211,9 +211,9 @@ export default defineComponent({
     top: 1%;
     bottom: 99%;
     /* 左右置中操作 */
-    left: 30%;
+    left: 20%;
     /* 讓左邊界在父容器寬度的 50% */
-    transform: translateX(-70%);
+    transform: translateX(-80%);
     /* 往左平移自身寬度的 50% */
     /* 設定邊界 */
     max-width: 100%;
@@ -266,6 +266,9 @@ export default defineComponent({
     }
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(2); /*放大logo比例*/
+    }
+    .HomeButtom{
+      transform: translateX(-80%) scale(2); /*放大logo比例*/
     } 
   }
 
@@ -282,6 +285,10 @@ export default defineComponent({
     }
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(3); /*放大logo比例*/
+    }
+    .HomeButtom {
+      transform: translateX(-80%) scale(3);
+      /*放大logo比例*/
     }
   }
 </style>
