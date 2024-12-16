@@ -41,7 +41,7 @@
     </div>
     <div v-if="isuploadpicture" :class="$style.uploadModal">
       <div :class="$style.modalContent">
-        <p>Please upload picture!</p>
+        <p>Please input question!</p>
       </div>
     </div>
     <div v-if="isinputquestion" :class="$style.inputquestionModal">
@@ -108,7 +108,7 @@
  
  
     try {
-      const response = await axios.post(`http://localhost:8000/api/upload`, formData, {
+      const response = await axios.post(`http://35.209.180.73:8000/api/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -133,19 +133,21 @@
     const imageFile = fileInputRef.value?.files?.[0];
     const inputText = question.value;
     // Optional: Add a check to ensure at least one input is provided
-    // if(!imageFile){
-    //   isuploadpicture.value = true;
-    //   console.log("請至少選擇圖片或輸入文字");
-    // }
-    if (!inputText && !imageFile) {
-      // isuploadpicture.value = false;
+    if(!inputText && imageFile){
+      isuploadpicture.value = true;
+      isinputquestion.value = false;
+      console.log("請至少選擇圖片或輸入文字");
+      return;
+    }
+    else if (!inputText && !imageFile) {
+      isuploadpicture.value = false;
       isinputquestion.value = true;
       console.log("請至少選擇圖片或輸入文字");
       return;
     }
     else{
       isProcessing.value = true; // 顯示「系統正在運算中」提示框
-      // isuploadpicture.value = false;
+      isuploadpicture.value = false;
       isinputquestion.value = false;
       sendDataToBackend(imageFile, inputText); 
     }
@@ -365,6 +367,10 @@
   }
  
  
+ </style>
  
-</style>
+ 
+ 
+ 
+ 
  

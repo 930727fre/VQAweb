@@ -53,7 +53,7 @@
         </div>
 
 
-        
+
         <PictureInput :class="$style.fixedPictureInput" />
 
 
@@ -68,7 +68,6 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import PictureInput from "../components/PictureInput.vue";
-
   export default defineComponent({
     name: "TapQuest",
     components: { PictureInput },
@@ -169,7 +168,7 @@
     top: 60%; /* Center the box vertically */
     right: 20%; /* Position it from the right */
     transform: translate(-50%, -50%); /* Center it both vertically and horizontally */
-    font-size: 1.3vw; /* Font size relative to viewport width */
+    font-size: 1vw; /* Font size relative to viewport width */
     line-height: 1.2;
     color: black; /* Black text color */
     background-color: white; /* White background */
@@ -183,9 +182,9 @@
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
     text-align: center; /* Align the text to the center */
-
     height: auto; /* Allow the height to adjust based on content */
     max-height: none; /* Don't limit the height */
+    
   }
   .background {/* contextArea隱藏兒子 */
     align-self: stretch;/* 延伸它爸 */
@@ -310,7 +309,6 @@
     line-height: normal;/* 正常行高 */
     letter-spacing: normal;/* 正常字母間距 */
   }
-
   .fixedPictureInput {
     position: fixed;   /* 固定在視口中 */
     bottom: 5.5%;      /* 距離底部 10px */
@@ -334,7 +332,6 @@
       justify-content: space-between; /* 項目之間有間距 */
     }
   }
-
   @media screen and (min-width: 768px) and (max-width: 1199px) {
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(2); /*放大logo比例*/
@@ -346,7 +343,6 @@
       right: 20%;
       transform: translateX(-50%);
     }
-
     .frameChild2 {   
       height: 20%;
       width: 18%;
@@ -355,10 +351,9 @@
       transform: translateX(-50%);
     }
     .instructions{
-      font-size: 2vw;
+      font-size: clamp(1rem, 1.5vw + 0.1rem, 2rem);
     }
   }
-
   @media screen and (max-width: 767px) {
     .tapQuest {
       flex-direction: column; /* 改為縱向排列 */
@@ -385,13 +380,12 @@
       right: 5%;
     }
     .instructions{
-      font-size: 2.5vw;
+      font-size: clamp(0.9rem, 1.5vw + 0.1rem, 2rem);
     }
   }
-  
   @media screen and (max-width: 368px){
     .instructions{
-      font-size: 3vw;
+      font-size: clamp(0.7rem, 1.5vw + 0.05rem, 1.5rem);
     }
   }
 </style>

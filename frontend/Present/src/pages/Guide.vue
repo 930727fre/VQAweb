@@ -40,7 +40,6 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import PictureInput from "../components/PictureInput.vue";
-
   export default defineComponent({
     name: "TapQuest",
     components: { PictureInput },
@@ -155,11 +154,9 @@
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
     text-align: center; /* Align the text to the center */
-
     height: auto; /* Allow the height to adjust based on content */
     max-height: none; /* Don't limit the height */
   }
-
   .background {/* contextArea隱藏兒子 */
     align-self: stretch;/* 延伸它爸 */
     height: 93.7%;
@@ -306,16 +303,14 @@
       justify-content: space-between; /* 項目之間有間距 */
     }
   }
-
   @media screen and (min-width: 768px) and (max-width: 1199px) {
     .logo1Icon {/* logo */
       transform: translateX(-50%) scale(2); /*放大logo比例*/
     } 
     .instructions{
-      font-size: 2vw;
+      font-size: clamp(1rem, 1.5vw + 0.1rem, 2rem);
     }
   }
-
   @media screen and (max-width: 767px) {
     .tapQuest {
       flex-direction: column; /* 改為縱向排列 */
@@ -325,12 +320,12 @@
       transform: translateX(-50%) scale(3); /*放大logo比例*/
     }
     .instructions{
-      font-size: 2.5vw;
+      font-size: clamp(0.9rem, 1.5vw + 0.1rem, 2rem);
     }
   }
   @media screen and (max-width: 368px) {
     .instructions{
-      font-size: 3vw;
+      font-size: clamp(0.7rem, 1.5vw + 0.05rem, 1.5rem);
     }
   }
 </style>

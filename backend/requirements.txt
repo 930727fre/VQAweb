@@ -2,3 +2,14 @@ fastapi
 uvicorn
 python-multipart
 typing
+langchain
+langchain-community
+langchain-chroma
+bs4
+requests
+langchain_ollama
+pandas
+tensorflow
+keras
+numpy
+pillow

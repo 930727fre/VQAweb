@@ -206,14 +206,14 @@ export default defineComponent({
   .HomeButtom {
     position: fixed;
     /* 設定相對位置 */
-    height: 19.1%;
-    width: 12.5%;
-    top: 1%;
-    bottom: 99%;
+    height: 10%;
+    width: 4%;
+    top: 6%;
+    bottom: 94%;
     /* 左右置中操作 */
-    left: 20%;
+    left: 15%;
     /* 讓左邊界在父容器寬度的 50% */
-    transform: translateX(-80%);
+    transform: translateX(-85%);
     /* 往左平移自身寬度的 50% */
     /* 設定邊界 */
     max-width: 100%;
