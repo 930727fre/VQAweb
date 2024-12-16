@@ -1,6 +1,7 @@
 <template>
-  <div :class="$style.result" @click="onResultContainerClick">
+  <div :class="$style.result">
     <img :class="$style.logo1Icon" alt="" src="/logo-1@2x.png" />
+    <img :class="$style.HomeButtom" @click="onResultContainerClick" alt="" src="/home_buttom.png" />
     <main :class="$style.layout">
       <div :class="$style.bb" />
       <section :class="$style.frameParent">
@@ -201,6 +202,28 @@ export default defineComponent({
     overflow: hidden;/* 超出則隱藏 */
     object-fit: contain;/* 完全填滿其容器 */
     z-index: 3;/* 第三層(最上層) */
+  }
+  .HomeButtom {
+    position: fixed;
+    /* 設定相對位置 */
+    height: 19.1%;
+    width: 12.5%;
+    top: 1%;
+    bottom: 99%;
+    /* 左右置中操作 */
+    left: 30%;
+    /* 讓左邊界在父容器寬度的 50% */
+    transform: translateX(-70%);
+    /* 往左平移自身寬度的 50% */
+    /* 設定邊界 */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    /* 超出則隱藏 */
+    object-fit: contain;
+    /* 完全填滿其容器 */
+    z-index: 3;
+    /* 第三層(最上層) */
   }
   .frameParent {
     height: 96%;
