@@ -1,0 +1,49 @@
+#version: '3.8'
+
+services:
+  ollama:
+    container_name: ollama
+    build: ./backend/ollama
+    ports:
+      - 11434:11434
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    tty: true
+    networks:
+      - app-network
+  frontend:
+    build: ./frontend/Present
+      # container_name: self-apitest-frontend
+    networks:
+      - app-network
+    # volumes:
+    #   - ./frontend/Present:/app
+
+  backend:
+    build: ./backend
+      # container_name: self-apitest-backend
+    networks:
+      - app-network
+    volumes:
+      - ./backend:/app
+
+  nginx:
+    build: ./nginx
+      #container_name: self-apitest-nginx
+    ports:
+      - "8000:80"  # 外部訪問 http://localhost:8000
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
