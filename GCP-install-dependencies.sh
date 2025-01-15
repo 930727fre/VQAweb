@@ -1,6 +1,8 @@
 sudo apt update
 sudo apt upgrade
 sudo apt install rsync
+sudo apt install git-lfs
+git lfs install
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 getent group docker
