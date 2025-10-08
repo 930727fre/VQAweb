@@ -20,6 +20,10 @@ A multimodal answering system based on RAG.
 
 For a hassle-free installation, run the `GCP-install-dependencies.sh` script to install all required dependencies on a Ubuntu GCP instance.
 
+## System Architecture
+
+![System Architecture](images/system-architecture.jpeg)
+
 ## How to Set Up Models
 
 This project requires `.h5` model files to run properly. Follow these steps to set up the models:
